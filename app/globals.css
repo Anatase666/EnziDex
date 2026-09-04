@@ -1,0 +1,349 @@
+@import 'tailwindcss';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ДИЗАЙН-ТОКЕНЫ  (ТЗ 7.2)
+
+   Единственный источник правды по цвету, типографике и ритму.
+   В компонентах произвольные hex запрещены — только эти токены.
+   Tailwind v4 генерирует из них утилиты: --color-ink → text-ink / bg-ink /
+   border-ink, --text-2xl → text-2xl, --spacing-gutter → px-gutter и т. д.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ─── Цвет ───────────────────────────────────────────────────────────────
+     Проверено на контраст по WCAG 2.1 AA (ТЗ 8.2). В комментариях —
+     коэффициент контраста к фону страницы #EEF3F2.                          */
+
+  --color-page: #eef3f2; /* холодный мятно-серый фон страницы             */
+  --color-surface: #ffffff; /* карточки, поля ввода, «поднятые» плоскости */
+  --color-sunken: #e6ecea; /* утопленные плоскости: таблицы, врезки       */
+
+  --color-ink: #10202a; /* основной текст, тёмная кнопка       15.0 : 1   */
+  --color-ink-muted: #5a6b72; /* подписи, вторичный текст       4.9 : 1   */
+  --color-ink-inverse: #f4f8f7; /* текст на тёмном фоне                   */
+
+  /* Акцент разделён на две роли намеренно: базовый #1E7F72 даёт 4.3 : 1 —
+     этого хватает для графики и границ (порог 3 : 1), но НЕ для текста.
+     Для ссылок и акцентного текста используется затемнённый accent-ink.     */
+  --color-accent: #1e7f72; /* графика, схемы, иконки, границы   4.3 : 1   */
+  --color-accent-ink: #17655b; /* ссылки и акцентный текст      6.1 : 1   */
+  --color-accent-soft: #e1edea; /* мягкая подложка акцентных блоков       */
+  --color-accent-hover: #135349; /* наведение на акцентных элементах      */
+
+  --color-hairline: #dce6e4; /* границы, разделители                     */
+  --color-hairline-strong: #c3d2ce; /* границы на белом, где нужен контраст */
+
+  --color-danger: #b3261e; /* ошибки валидации                  5.4 : 1   */
+  --color-danger-soft: #fdecea;
+
+  /* ─── Типографика ────────────────────────────────────────────────────────
+     Одна гарнитура (ТЗ 7.3). Переменная --font-onest приходит из next/font.  */
+
+  --font-sans:
+    var(--font-onest), 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue',
+    Arial, sans-serif;
+
+  --text-xs: 0.8125rem; /* 13px */
+  --text-xs--line-height: 1.45;
+  --text-sm: 0.875rem; /* 14px */
+  --text-sm--line-height: 1.5;
+  --text-base: 1rem; /* 16px */
+  --text-base--line-height: 1.65;
+  --text-lg: 1.0625rem; /* 17px — основной текст на десктопе */
+  --text-lg--line-height: 1.7;
+  --text-xl: 1.25rem; /* 20px */
+  --text-xl--line-height: 1.5;
+  --text-2xl: 1.5rem; /* 24px */
+  --text-2xl--line-height: 1.3;
+  --text-2xl--letter-spacing: -0.011em;
+  --text-3xl: 1.875rem; /* 30px */
+  --text-3xl--line-height: 1.25;
+  --text-3xl--letter-spacing: -0.016em;
+  --text-4xl: 2.375rem; /* 38px */
+  --text-4xl--line-height: 1.18;
+  --text-4xl--letter-spacing: -0.02em;
+  --text-5xl: 3rem; /* 48px */
+  --text-5xl--line-height: 1.1;
+  --text-5xl--letter-spacing: -0.024em;
+
+  /* Заголовок hero: плавно тянется от 360px до 1440px без брейкпоинтов. */
+  --text-hero: clamp(2.125rem, 1.15rem + 4.35vw, 4rem);
+  --text-hero--line-height: 1.07;
+  --text-hero--letter-spacing: -0.028em;
+
+  /* Заголовок секции: тоже текучий, чтобы на 360px не переполнялся. */
+  --text-section: clamp(1.625rem, 1.15rem + 2.1vw, 2.5rem);
+  --text-section--line-height: 1.16;
+  --text-section--letter-spacing: -0.021em;
+
+  /* ─── Скругления ─────────────────────────────────────────────────────── */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.5rem;
+
+  /* ─── Тени ───────────────────────────────────────────────────────────────
+     Намеренно скупо: тень — инструмент иерархии, а не украшение (ТЗ 7.4).   */
+  --shadow-card:
+    0 1px 2px rgb(16 32 42 / 0.04), 0 8px 24px -12px rgb(16 32 42 / 0.12);
+  --shadow-lifted:
+    0 2px 4px rgb(16 32 42 / 0.05), 0 18px 40px -16px rgb(16 32 42 / 0.18);
+
+  /* ─── Ритм ───────────────────────────────────────────────────────────── */
+  --spacing-gutter: 1.5rem; /* боковые поля на мобильном (ТЗ 7.5)  */
+  --spacing-gutter-lg: 2.5rem; /* боковые поля на десктопе          */
+  --spacing-header: 4.25rem; /* высота залипающего хедера           */
+
+  /* Пространство имён --container-* даёт утилиты max-w-*. */
+  --container-page: 75rem; /* 1200px — максимальная ширина (ТЗ 7.5) */
+  --container-measure: 42rem; /* ~72 знака — длина строки (ТЗ 7.3)  */
+
+  /* Брейкпоинты по ТЗ 7.5: 360 / 768 / 1024 / 1440.
+     360 — базовое состояние (mobile-first), поэтому явных всего три + sm. */
+  --breakpoint-sm: 40rem; /* 640  — служебный, мелкие перестроения */
+  --breakpoint-md: 48rem; /* 768 */
+  --breakpoint-lg: 64rem; /* 1024 */
+  --breakpoint-xl: 90rem; /* 1440 */
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   БАЗОВЫЙ СЛОЙ
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    /* Залипающий хедер не должен перекрывать якорную цель (ТЗ 9, «Десктоп»). */
+    scroll-padding-top: calc(var(--spacing-header) + 1.5rem);
+  }
+
+  body {
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Страховка от горизонтального скролла на 360px (ТЗ 9, «Мобильная»). */
+    overflow-x: hidden;
+  }
+
+  /* Заголовки набираются плотнее корпуса — это задано в шкале.
+     Здесь только вес и перенос, чтобы длинные термины не рвали вёрстку.   */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Единый видимый фокус вместо снятого outline (ТЗ 8.2). */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-ink-inverse);
+  }
+
+  /* Убираем «прыжок» вёрстки при появлении скроллбара на широких экранах. */
+  @supports (scrollbar-gutter: stable) {
+    html {
+      scrollbar-gutter: stable;
+    }
+  }
+
+  /* Уважение к системной настройке (ТЗ 8.2). */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   КОМПОНЕНТНЫЙ СЛОЙ
+   Только то, что действительно повторяется и плохо выражается утилитами.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  /* Ссылка внутри текстового потока. */
+  .link {
+    color: var(--color-accent-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+    text-decoration-color: color-mix(
+      in srgb,
+      var(--color-accent-ink) 40%,
+      transparent
+    );
+    transition:
+      text-decoration-color 150ms ease,
+      color 150ms ease;
+  }
+
+  .link:hover {
+    color: var(--color-accent-hover);
+    text-decoration-color: currentColor;
+  }
+
+  /* Длинный текст: /legal, /privacy, развёрнутые ответы FAQ.
+     Своя реализация вместо @tailwindcss/typography — плагин тянет много
+     лишнего ради десятка правил (ТЗ 6.4: библиотеки только по необходимости). */
+  .rich-text {
+    max-width: var(--container-measure);
+    color: var(--color-ink);
+    line-height: 1.7;
+  }
+
+  .rich-text > * + * {
+    margin-top: 1em;
+  }
+
+  .rich-text h3 {
+    margin-top: 2em;
+    font-size: var(--text-xl);
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  .rich-text h4 {
+    margin-top: 1.75em;
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+
+  .rich-text ul,
+  .rich-text ol {
+    padding-left: 1.25em;
+  }
+
+  .rich-text ul {
+    list-style: disc;
+  }
+
+  .rich-text ol {
+    list-style: decimal;
+  }
+
+  .rich-text li + li {
+    margin-top: 0.4em;
+  }
+
+  .rich-text li::marker {
+    color: var(--color-ink-muted);
+  }
+
+  .rich-text a {
+    color: var(--color-accent-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .rich-text strong {
+    font-weight: 600;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────────
+     Схема механизма действия.
+
+     Единственная анимация появления на сайте. ТЗ 7.4 разрешает ровно один
+     осмысленный анимированный момент и прямо называет в качестве примера
+     схему механизма — здесь движение несёт содержание, а не украшает.
+
+     Запускается один раз при попадании в область просмотра; повторный показ
+     возможен только по нажатию кнопки. При prefers-reduced-motion глобальное
+     правило сжимает длительности до 0.01ms, и благодаря animation-fill-mode:
+     both схема мгновенно принимает конечное состояние — то есть остаётся
+     информативной, просто без движения.
+     ───────────────────────────────────────────────────────────────────────── */
+
+  .mechanism-diagram .mech-enzyme,
+  .mechanism-diagram .mech-fragments {
+    opacity: 0;
+  }
+
+  .mechanism-diagram[data-play='true'] .mech-enzyme {
+    animation: mech-approach 900ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+
+  .mechanism-diagram[data-play='true'] .mech-bond {
+    animation: mech-cleave 400ms ease-in 900ms both;
+  }
+
+  .mechanism-diagram[data-play='true'] .mech-right {
+    animation: mech-drift-right 1000ms cubic-bezier(0.33, 1, 0.68, 1) 1150ms both;
+  }
+
+  .mechanism-diagram[data-play='true'] .mech-fragments {
+    animation: mech-release 900ms cubic-bezier(0.33, 1, 0.68, 1) 1300ms both;
+  }
+
+  @keyframes mech-approach {
+    from {
+      opacity: 0;
+      transform: translateY(-90px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes mech-cleave {
+    from {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    to {
+      opacity: 0;
+      transform: scaleX(0.2);
+    }
+  }
+
+  @keyframes mech-drift-right {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(26px);
+    }
+  }
+
+  @keyframes mech-release {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.7);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
