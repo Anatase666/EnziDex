@@ -1,7 +1,5 @@
 import type { Metadata } from 'next';
 
-import { CTABlock } from '@/components/sections/CTABlock';
-import { Documents } from '@/components/sections/Documents';
 import { EvidenceBoundaries } from '@/components/sections/EvidenceBoundaries';
 import { LabTests } from '@/components/sections/LabTests';
 import { Mechanism } from '@/components/sections/Mechanism';
@@ -16,16 +14,19 @@ import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 export const metadata: Metadata = buildMetadata('science');
 
 /**
- * Научная база (ТЗ 4.3).
+ * Научная база (ТЗ 4.3 с учётом правок заказчика).
  *
- * Порядок разделов выбран так, чтобы оговорка не выглядела отпиской:
- * сначала механизм, затем прямой разбор того, что доказано и что нет,
- * затем отсутствующие пока собственные испытания, затем источники —
- * и только в конце формальный дисклеймер, который к этому моменту
- * уже ничего не «раскрывает впервые».
+ * Убраны: анимированная схема механизма, парная колонка «чего пока не
+ * известно», раздел «Документы» и финальный призыв с кнопками.
  *
- * Секция визуализации результатов (FR-S3) отсутствует намеренно:
- * ТЗ требует не публиковать её без количественных данных.
+ * Дисклеймер о стадии исследований оставлен намеренно. Заказчик его убрать
+ * не просил, а требование BC-3 — не переносить результаты in vitro на
+ * клинический эффект — остаётся обязательным: страница приводит числовые
+ * данные об эффективности фермента, и без этой оговорки они читались бы
+ * как обещание клинического результата.
+ *
+ * Секция визуализации результатов (FR-S3) отсутствует: ТЗ требует не
+ * публиковать её без количественных данных, а их пока нет.
  */
 export default function SciencePage() {
   return (
@@ -45,22 +46,14 @@ export default function SciencePage() {
       <EvidenceBoundaries />
       <LabTests />
       <References />
-      <Documents />
 
-      <section className="pb-4">
+      <section className="pt-4 pb-16 md:pb-20">
         <Container>
           <Disclaimer title={researchDisclaimer.title}>
             {researchDisclaimer.body}
           </Disclaimer>
         </Container>
       </section>
-
-      <CTABlock
-        heading="Остались вопросы по данным"
-        description="Если для оценки продукта нужен документ, которого нет на сайте, — напишите, какой именно. Ответим тем, что есть на сегодня, и скажем прямо, чего пока нет."
-        buttonLabel="Написать нам"
-        secondary={{ label: 'Вопросы и безопасность', href: '/faq' }}
-      />
 
       <JsonLd data={breadcrumbJsonLd('science')} />
     </>

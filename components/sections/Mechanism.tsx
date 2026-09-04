@@ -1,15 +1,18 @@
-import { MechanismDiagram } from './MechanismDiagram';
 import { Section } from '@/components/layout/Section';
 import { Accordion } from '@/components/ui/Accordion';
 import { mechanism } from '@/content/science';
 
 /**
- * Механизм действия (ТЗ FR-S1).
+ * Механизм действия (ТЗ FR-S1 с учётом правок заказчика).
  *
  * Двухуровневая подача: сверху объяснение для неспециалиста, ниже —
  * раскрывающийся блок с терминологией, ферментной номенклатурой и ссылкой
  * на конкретную работу. Так страница остаётся читаемой для аудитории A,
  * не теряя содержания для аудитории B.
+ *
+ * Анимированная схема расщепления цепи убрана. Стадии реакции остались
+ * текстовым списком — последовательность передана связкой «точка на общей
+ * линии», без цифр, которые ТЗ 7.4 оставляет разделу «Как использовать».
  */
 export function Mechanism() {
   return (
@@ -33,7 +36,7 @@ export function Mechanism() {
             className="absolute top-2 bottom-2 left-[5px] w-px bg-hairline-strong"
           />
 
-          {mechanism.diagram.steps.map((step) => (
+          {mechanism.stages.steps.map((step) => (
             <li key={step.id} className="relative flex gap-5">
               <span
                 aria-hidden="true"
@@ -47,8 +50,6 @@ export function Mechanism() {
           ))}
         </ol>
       </div>
-
-      <MechanismDiagram />
 
       <div className="mt-12">
         <Accordion

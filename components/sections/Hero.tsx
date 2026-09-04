@@ -1,14 +1,19 @@
-import { ChainIllustration } from './ChainIllustration';
+import { PackageRender } from './PackageRender';
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/ui/Button';
 import { hero } from '@/content/home';
 
 /**
- * Первый экран (ТЗ FR-H1).
+ * Первый экран (ТЗ FR-H1 с учётом правок заказчика).
  *
+ * Кнопка «Оставить заявку» убрана вместе со всей механикой заявок: сайт
+ * ничего не принимает и не отправляет. Осталась одна кнопка — переход к
+ * разбору механизма, и она же теперь основная.
+ *
+ * Справа — объёмная визуализация упаковки вместо прежней абстрактной схемы.
  * Над заголовком нет капслок-лейбла, в заголовке нет слова, выделенного
- * цветом, у кнопок нет стрелок — всё это ТЗ 7.4 называет шаблонными приёмами.
- * Иерархию держат кегль, вес и воздух.
+ * цветом, у кнопки нет стрелки — всё это ТЗ 7.4 называет шаблонными
+ * приёмами. Иерархию держат кегль, вес и воздух.
  */
 export function Hero() {
   return (
@@ -22,12 +27,9 @@ export function Hero() {
               {hero.subheading}
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button href={hero.primaryCta.href} size="lg">
-                {hero.primaryCta.label}
-              </Button>
-              <Button href={hero.secondaryCta.href} variant="secondary" size="lg">
-                {hero.secondaryCta.label}
+            <div className="mt-9">
+              <Button href={hero.cta.href} size="lg">
+                {hero.cta.label}
               </Button>
             </div>
 
@@ -44,7 +46,7 @@ export function Hero() {
           </div>
 
           <div className="lg:col-span-5 xl:col-span-6">
-            <ChainIllustration className="mx-auto max-w-lg" />
+            <PackageRender className="mx-auto max-w-md lg:max-w-lg" />
           </div>
         </div>
       </Container>

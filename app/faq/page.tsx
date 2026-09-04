@@ -1,18 +1,20 @@
 import type { Metadata } from 'next';
 
-import { CTABlock } from '@/components/sections/CTABlock';
 import { FaqList } from '@/components/sections/FaqList';
 import { Container } from '@/components/layout/Container';
 import { JsonLd } from '@/components/ui/JsonLd';
-import { faqCategories, faqFallback, faqItems } from '@/content/faq';
+import { faqCategories, faqItems } from '@/content/faq';
 import { breadcrumbJsonLd, buildMetadata, faqJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata('faq');
 
 /**
- * Вопросы и безопасность (ТЗ 4.4).
+ * Вопросы и безопасность (ТЗ 4.4 с учётом правок заказчика).
  *
- * Часть ответов пока опирается на данные, которых у нас нет: возраст,
+ * Убраны категория «Поставки и сотрудничество» и завершающий блок
+ * «Не нашли ответ» с кнопкой обращения.
+ *
+ * Часть ответов опирается на данные, которых у нас нет: возраст,
  * беременность, противопоказания, режим применения. Эти вопросы не удалены
  * со страницы — они обязательны по FR-F2, и честный пробел полезнее
  * правдоподобного вымысла. В разметку FAQPage такие вопросы при этом не
@@ -28,9 +30,9 @@ export default function FaqPage() {
             Вопросы и безопасность
           </h1>
           <p className="mt-5 max-w-measure text-xl text-ink-muted">
-            {faqItems.length} вопросов о продукте, составе, применении и поставках.
-            Там, где ответ зависит от инструкции изготовителя, мы говорим об этом
-            прямо, а не заполняем пробел общими словами.
+            {faqItems.length} вопросов о продукте, составе и применении. Там, где
+            ответ зависит от инструкции изготовителя, мы говорим об этом прямо,
+            а не заполняем пробел общими словами.
           </p>
 
           {/* Быстрый переход по категориям: список длинный,
@@ -53,13 +55,6 @@ export default function FaqPage() {
       </section>
 
       <FaqList />
-
-      <CTABlock
-        heading={faqFallback.title}
-        description={faqFallback.description}
-        buttonLabel={faqFallback.ctaLabel}
-        secondary={{ label: 'Научная база', href: '/science' }}
-      />
 
       <JsonLd data={faqJsonLd()} />
       <JsonLd data={breadcrumbJsonLd('faq')} />

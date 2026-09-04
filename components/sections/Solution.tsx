@@ -1,18 +1,16 @@
-import Link from 'next/link';
-
 import { Container } from '@/components/layout/Container';
-import { Disclaimer } from '@/components/ui/Disclaimer';
 import { solution } from '@/content/home';
-import { mechanism } from '@/content/science';
 
 /**
- * Решение (ТЗ FR-H3).
+ * Решение (ТЗ FR-H3 с учётом правок заказчика).
  *
- * Четыре шага механизма показаны как последовательность стадий одной
- * реакции — это единственное место на главной, где содержимое действительно
- * упорядочено. Нумерация 01/02/03 при этом не ставится: ТЗ 7.4 оставляет её
- * только разделу «Как использовать», а здесь порядок читается из связки
- * стадий и без цифр.
+ * Сетка из четырёх стадий реакции, блок-оговорка и ссылка «Разбор механизма
+ * и источники» с этой секции убраны. Осталось объяснение механизма текстом;
+ * подробный разбор со стадиями и источниками живёт на странице научной базы,
+ * куда ведёт основная навигация.
+ *
+ * Пометка in vitro не потерялась вместе с блоком-оговоркой: она встроена
+ * в тот же абзац, где стоит само утверждение (см. content/home.ts).
  */
 export function Solution() {
   return (
@@ -27,23 +25,6 @@ export function Solution() {
               <p key={paragraph.slice(0, 40)}>{paragraph}</p>
             ))}
           </div>
-        </div>
-
-        <ol className="mt-12 grid gap-px overflow-hidden rounded-xl border border-hairline bg-hairline sm:grid-cols-2 lg:grid-cols-4">
-          {mechanism.diagram.steps.map((step) => (
-            <li key={step.id} className="bg-surface p-6">
-              <h3 className="font-semibold text-ink">{step.title}</h3>
-              <p className="mt-2 text-base text-ink-muted">{step.description}</p>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <Disclaimer className="lg:max-w-2xl">{solution.caveat}</Disclaimer>
-
-          <Link href={solution.moreLink.href} className="link shrink-0 text-lg">
-            {solution.moreLink.label}
-          </Link>
         </div>
       </Container>
     </section>

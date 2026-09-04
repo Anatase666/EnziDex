@@ -1,5 +1,5 @@
+import { PackageRender } from './PackageRender';
 import { Container } from '@/components/layout/Container';
-import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder';
 import { Value } from '@/components/ui/Value';
 import { productCard } from '@/content/product';
 
@@ -16,11 +16,7 @@ export function ProductCard() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <ImagePlaceholder
-              label="Фотография или 3D-рендер продукта. Материал ожидается от изготовителя."
-              ratio="portrait"
-              className="lg:sticky lg:top-28"
-            />
+            <PackageRender className="mx-auto max-w-sm lg:sticky lg:top-28 lg:max-w-none" />
           </div>
 
           <div className="lg:col-span-7">
