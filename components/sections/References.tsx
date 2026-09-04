@@ -17,6 +17,7 @@ export function References() {
   return (
     <Section
       id="references"
+      tone="surface"
       heading="Источники"
       lead="Работы, на которые опирается этот раздел. Ссылки ведут на постоянные адреса DOI."
     >

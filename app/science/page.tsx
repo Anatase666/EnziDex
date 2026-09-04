@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
 
+import { Engineering } from '@/components/sections/Engineering';
+import { EnzymeOrigin } from '@/components/sections/EnzymeOrigin';
 import { EvidenceBoundaries } from '@/components/sections/EvidenceBoundaries';
 import { LabTests } from '@/components/sections/LabTests';
 import { Mechanism } from '@/components/sections/Mechanism';
+import { MutantResults } from '@/components/sections/MutantResults';
+import { ProjectStage } from '@/components/sections/ProjectStage';
 import { References } from '@/components/sections/References';
 import { Container } from '@/components/layout/Container';
 import { Disclaimer } from '@/components/ui/Disclaimer';
@@ -14,19 +18,16 @@ import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 export const metadata: Metadata = buildMetadata('science');
 
 /**
- * Научная база (ТЗ 4.3 с учётом правок заказчика).
+ * Научная база (ТЗ 4.3).
  *
- * Убраны: анимированная схема механизма, парная колонка «чего пока не
- * известно», раздел «Документы» и финальный призыв с кнопками.
+ * Порядок разделов ведёт читателя от «что происходит во рту» к «что мы с
+ * этим сделали»: механизм → откуда фермент → почему его пришлось
+ * переделывать → что показал скрининг → собственные испытания → что
+ * доказано → стадия проекта → источники.
  *
- * Дисклеймер о стадии исследований оставлен намеренно. Заказчик его убрать
- * не просил, а требование BC-3 — не переносить результаты in vitro на
- * клинический эффект — остаётся обязательным: страница приводит числовые
- * данные об эффективности фермента, и без этой оговорки они читались бы
- * как обещание клинического результата.
- *
- * Секция визуализации результатов (FR-S3) отсутствует: ТЗ требует не
- * публиковать её без количественных данных, а их пока нет.
+ * Дисклеймер о стадии исследований стоит последним и остаётся обязательным
+ * (BC-3): страница приводит числовые данные об активности фермента, и без
+ * оговорки они читались бы как обещание клинического результата.
  */
 export default function SciencePage() {
   return (
@@ -43,8 +44,12 @@ export default function SciencePage() {
       </section>
 
       <Mechanism />
-      <EvidenceBoundaries />
+      <EnzymeOrigin />
+      <Engineering />
+      <MutantResults />
       <LabTests />
+      <EvidenceBoundaries />
+      <ProjectStage />
       <References />
 
       <section className="pt-4 pb-16 md:pb-20">
