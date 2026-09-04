@@ -109,7 +109,12 @@ export function Header() {
                 onClick={() => setIsMenuOpen(true)}
                 aria-label="Открыть меню"
                 aria-expanded={isMenuOpen}
-                aria-controls="mobile-menu"
+                // Панель размонтирована, пока меню закрыто, поэтому
+                // aria-controls ставится только когда цель существует:
+                // ссылка на несуществующий id — висячая, и скринридер
+                // сообщает о ней как об ошибке разметки. Состояние при
+                // этом всё равно передаётся через aria-expanded.
+                aria-controls={isMenuOpen ? 'mobile-menu' : undefined}
                 className="-mr-2 inline-flex size-11 items-center justify-center rounded-lg text-ink transition-colors hover:bg-sunken lg:hidden"
               >
                 <MenuIcon className="size-6" aria-hidden="true" />
