@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!--
+    Favicon (ТЗ 8.3, критерий приёмки «favicon корректен, включая тёмную тему»).
+
+    Знак повторяет логотип: цепь звеньев с разорванной связью. Цвет задан
+    через prefers-color-scheme прямо внутри SVG, поэтому в тёмной теме
+    браузера иконка светлеет и не сливается с панелью вкладок — для этого
+    не нужны ни второй файл, ни JavaScript.
+  -->
+  <style>
+    :root { --mark: #17655B; }
+    @media (prefers-color-scheme: dark) { :root { --mark: #6FC7B8; } }
+    .mark { stroke: var(--mark); }
+  </style>
+
+  <g class="mark" fill="none" stroke-width="2.6" stroke-linecap="round">
+    <circle cx="10.4" cy="19.4" r="4.1" />
+    <circle cx="19.6" cy="10.2" r="4.1" />
+    <path d="M13.6 16.3 L 16.4 13.4" />
+    <path d="M23.2 15.6 L 25.2 17.8" opacity="0.45" />
+    <path d="M24.6 22.6 L 22.4 24.6" opacity="0.45" />
+  </g>
+</svg>
