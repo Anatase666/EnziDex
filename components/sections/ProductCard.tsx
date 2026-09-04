@@ -1,0 +1,50 @@
+import { Container } from '@/components/layout/Container';
+import { ImagePlaceholder } from '@/components/ui/ImagePlaceholder';
+import { Value } from '@/components/ui/Value';
+import { productCard } from '@/content/product';
+
+/**
+ * Карточка продукта (ТЗ FR-P1).
+ *
+ * Атрибуты выведены списком определений: пары «характеристика — значение»
+ * это ровно то, для чего существует <dl>, и скринридер читает их связанно.
+ * Незаполненные значения не прячутся, а помечаются — см. components/ui/Value.
+ */
+export function ProductCard() {
+  return (
+    <section className="pt-10 pb-16 md:pt-14 md:pb-20">
+      <Container>
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
+          <div className="lg:col-span-5">
+            <ImagePlaceholder
+              label="Фотография или 3D-рендер продукта. Материал ожидается от изготовителя."
+              ratio="portrait"
+              className="lg:sticky lg:top-28"
+            />
+          </div>
+
+          <div className="lg:col-span-7">
+            <h1 className="text-4xl text-ink">{productCard.title}</h1>
+            <p className="mt-4 max-w-measure text-xl text-ink-muted">
+              {productCard.subtitle}
+            </p>
+
+            <dl className="mt-10 divide-y divide-hairline border-y border-hairline">
+              {productCard.attributes.map((attribute) => (
+                <div
+                  key={attribute.label}
+                  className="grid gap-1 py-4 sm:grid-cols-[minmax(0,14rem)_1fr] sm:gap-6"
+                >
+                  <dt className="text-ink-muted">{attribute.label}</dt>
+                  <dd className="font-medium text-ink">
+                    <Value value={attribute.value} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
