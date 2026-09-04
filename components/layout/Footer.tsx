@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { Container } from './Container';
 import { Logo } from './Logo';
+import { RichText } from '@/components/ui/RichText';
 import { Value } from '@/components/ui/Value';
 import {
   contacts,
@@ -20,7 +21,7 @@ import { isFilled } from '@/content/types';
  * Колонка контактов выводится только если заполнен хотя бы один канал.
  * Пока данных нет, она не показывается вовсе — это заодно совпадает с
  * решением убрать с сайта раздел контактов: показывать столбец из трёх
- * строк «уточняется» было бы хуже, чем не показывать ничего.
+ * строк-заглушек было бы хуже, чем не показывать ничего.
  *
  * Год подставляется на этапе сборки: сайт статический, и это ровно тот
  * случай, когда вычислять дату в браузере не нужно — достаточно
@@ -106,12 +107,17 @@ export function Footer() {
           <p className="text-sm text-ink-muted">
             © {year} {requisites.shortName}
             {' · '}
-            ИНН <Value value={requisites.inn} pending="уточняется" />
+            ИНН <Value value={requisites.inn} />
             {' · '}
-            ОГРН <Value value={requisites.ogrn} pending="уточняется" />
+            ОГРН <Value value={requisites.ogrn} />
           </p>
 
-          <p className="mt-3 max-w-3xl text-sm text-ink-muted">{footerDisclaimer}</p>
+          {/* Через RichText, а не как обычный текст: в дисклеймере есть
+              незаполненное место, и оно должно выглядеть пометкой, а не
+              служебным маркером. */}
+          <RichText measure={false} className="mt-3 max-w-3xl text-sm text-ink-muted">
+            {footerDisclaimer}
+          </RichText>
         </div>
       </Container>
     </footer>

@@ -41,7 +41,7 @@ export const requisites: Requisites = {
   inn: TODO_CONTENT,
   ogrn: TODO_CONTENT,
   kpp: TODO_CONTENT,
-  legalAddress: `Пермский край, ${TODO_CONTENT}`,
+  legalAddress: TODO_CONTENT,
   actualAddress: TODO_CONTENT,
 };
 

@@ -1,4 +1,5 @@
 import { isFilled } from '@/content/types';
+import { PENDING_LABEL } from '@/lib/richText';
 import { cn } from '@/lib/cn';
 
 type ValueProps = {
@@ -20,11 +21,14 @@ type ValueProps = {
  * Полный список таких мест собирает scripts/check-content.mjs, а сборка
  * с CONTENT_STRICT=1 не проходит, пока хоть один пробел остался.
  */
-export function Value({ value, pending = 'уточняется', className }: ValueProps) {
+export function Value({ value, pending = PENDING_LABEL, className }: ValueProps) {
   if (isFilled(value)) return <span className={className}>{value}</span>;
 
   return (
-    <span className={cn('text-ink-muted italic', className)} title="Сведения ещё не предоставлены изготовителем">
+    <span
+      className={cn('text-ink-muted italic', className)}
+      title="Сведения ещё не предоставлены изготовителем"
+    >
       {pending}
     </span>
   );

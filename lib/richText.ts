@@ -13,11 +13,16 @@
  * инъекция разметки через контент технически невозможна.
  */
 
+/** Как незаполненное место выглядит для читателя. */
+export const PENDING_LABEL = 'Требует корректировки';
+
 export type InlineToken =
   | { type: 'text'; value: string }
   | { type: 'bold'; value: string }
   | { type: 'italic'; value: string }
-  | { type: 'link'; value: string; href: string };
+  | { type: 'link'; value: string; href: string }
+  /** Маркер TODO_CONTENT, попавший в середину фразы. */
+  | { type: 'pending' };
 
 export type Block =
   | { type: 'paragraph'; tokens: InlineToken[] }
@@ -25,7 +30,11 @@ export type Block =
 
 // Порядок альтернатив важен: **жирный** должен проверяться до *курсива*,
 // иначе двойная звёздочка разберётся как пустой курсив.
-const INLINE_RE = /\*\*([^*]+)\*\*|\*([^*\n]+)\*|\[([^\]]+)\]\(([^)]+)\)/g;
+// TODO_CONTENT распознаётся здесь же: маркер часто стоит в середине фразы
+// («режим применения: TODO_CONTENT»), и подменять его простым поиском по
+// строке значило бы потерять возможность оформить пометку отдельно.
+const INLINE_RE =
+  /\*\*([^*]+)\*\*|\*([^*\n]+)\*|\[([^\]]+)\]\(([^)]+)\)|(TODO_CONTENT)/g;
 
 export function parseInline(text: string): InlineToken[] {
   const tokens: InlineToken[] = [];
@@ -37,7 +46,7 @@ export function parseInline(text: string): InlineToken[] {
       tokens.push({ type: 'text', value: text.slice(lastIndex, index) });
     }
 
-    const [full, bold, italic, linkText, linkHref] = match;
+    const [full, bold, italic, linkText, linkHref, pending] = match;
 
     if (bold !== undefined) {
       tokens.push({ type: 'bold', value: bold });
@@ -45,6 +54,8 @@ export function parseInline(text: string): InlineToken[] {
       tokens.push({ type: 'italic', value: italic });
     } else if (linkText !== undefined && linkHref !== undefined) {
       tokens.push({ type: 'link', value: linkText, href: linkHref });
+    } else if (pending !== undefined) {
+      tokens.push({ type: 'pending' });
     }
 
     lastIndex = index + full.length;
@@ -87,6 +98,7 @@ export function toPlainText(text: string): string {
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/\*\*([^*]+)\*\*/g, '$1')
     .replace(/\*([^*\n]+)\*/g, '$1')
+    .replace(/TODO_CONTENT/g, PENDING_LABEL)
     .replace(/^-\s+/gm, '')
     .replace(/\s*\n\s*/g, ' ')
     .trim();

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Fragment } from 'react';
 
 import { cn } from '@/lib/cn';
-import { parseBlocks } from '@/lib/richText';
+import { PENDING_LABEL, parseBlocks } from '@/lib/richText';
 import type { InlineToken } from '@/lib/richText';
 
 /**
@@ -49,6 +49,20 @@ function Inline({ tokens }: { tokens: InlineToken[] }) {
               <Link key={index} href={token.href} className="link">
                 {token.value}
               </Link>
+            );
+
+          case 'pending':
+            // Незаполненное место внутри фразы. Выглядит так же, как
+            // в components/ui/Value, чтобы пробелы читались единообразно
+            // независимо от того, целое это поле или его часть.
+            return (
+              <span
+                key={index}
+                className="text-ink-muted italic"
+                title="Сведения ещё не предоставлены изготовителем"
+              >
+                {PENDING_LABEL}
+              </span>
             );
 
           case 'text':
