@@ -17,19 +17,25 @@ import { isFilled } from '@/content/types';
 /**
  * Подвал (ТЗ FR-G2).
  *
+ * Колонка контактов выводится только если заполнен хотя бы один канал.
+ * Пока данных нет, она не показывается вовсе — это заодно совпадает с
+ * решением убрать с сайта раздел контактов: показывать столбец из трёх
+ * строк «уточняется» было бы хуже, чем не показывать ничего.
+ *
  * Год подставляется на этапе сборки: сайт статический, и это ровно тот
  * случай, когда вычислять дату в браузере не нужно — достаточно
  * пересобрать сайт, что и так происходит при любой правке контента.
  */
 export function Footer() {
   const year = new Date().getFullYear();
+  const visibleContacts = contacts.filter((channel) => isFilled(channel.value));
 
   return (
     <footer className="mt-auto border-t border-hairline bg-surface">
       <Container>
         <div className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* Бренд */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-5">
             <Logo withDescriptor={false} />
             <p className="mt-4 max-w-xs text-sm text-ink-muted">{footer.brandNote}</p>
             <p className="mt-3 max-w-xs text-sm text-ink-muted">{site.tagline}</p>
@@ -52,18 +58,30 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Контакты */}
-          <div className="lg:col-span-3">
-            <h2 className="text-sm font-semibold text-ink">{footer.contactsHeading}</h2>
-            <ul className="mt-4 flex flex-col gap-3">
-              {contacts.map((channel) => (
-                <li key={channel.kind} className="text-sm">
-                  <span className="block text-ink-muted">{channel.label}</span>
-                  <ContactValue channel={channel} />
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Контакты — только если есть что показать */}
+          {visibleContacts.length > 0 && (
+            <div className="lg:col-span-2">
+              <h2 className="text-sm font-semibold text-ink">{footer.contactsHeading}</h2>
+              <ul className="mt-4 flex flex-col gap-3">
+                {visibleContacts.map((channel) => (
+                  <li key={channel.kind} className="text-sm">
+                    <span className="block text-ink-muted">{channel.label}</span>
+                    <a
+                      href={
+                        channel.href ??
+                        (channel.kind === 'email'
+                          ? `mailto:${channel.value}`
+                          : `tel:${channel.value.replace(/[^\d+]/g, '')}`)
+                      }
+                      className="text-ink transition-colors hover:text-accent-ink"
+                    >
+                      {channel.value}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {/* Документы */}
           <nav aria-label="Юридические документы" className="lg:col-span-2">
@@ -97,27 +115,5 @@ export function Footer() {
         </div>
       </Container>
     </footer>
-  );
-}
-
-function ContactValue({ channel }: { channel: (typeof contacts)[number] }) {
-  if (!isFilled(channel.value)) {
-    return <Value value={channel.value} className="text-sm" />;
-  }
-
-  const href =
-    channel.href ??
-    (channel.kind === 'email'
-      ? `mailto:${channel.value}`
-      : channel.kind === 'phone'
-        ? `tel:${channel.value.replace(/[^\d+]/g, '')}`
-        : undefined);
-
-  if (!href) return <span className="text-ink">{channel.value}</span>;
-
-  return (
-    <a href={href} className="text-ink transition-colors hover:text-accent-ink">
-      {channel.value}
-    </a>
   );
 }

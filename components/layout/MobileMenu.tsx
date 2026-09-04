@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { useCallback, useEffect, useRef } from 'react';
 
-import { Button } from '@/components/ui/Button';
 import { CloseIcon } from '@/components/icons';
 import { Logo } from './Logo';
 import { legalNav, mainNav } from '@/content/site';
@@ -17,8 +16,6 @@ type MobileMenuProps = {
   isOpen: boolean;
   onClose: () => void;
   pathname: string | null;
-  /** Кнопка CTA скрывается на странице контактов (ТЗ FR-G1). */
-  showCta: boolean;
 };
 
 /**
@@ -29,7 +26,7 @@ type MobileMenuProps = {
  * панели: без ловушки таб уводит на ссылки под наложением, и пользователь
  * клавиатуры теряет контекст.
  */
-export function MobileMenu({ isOpen, onClose, pathname, showCta }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   /** Элемент, с которого меню открыли, — чтобы вернуть на него фокус. */
@@ -153,13 +150,7 @@ export function MobileMenu({ isOpen, onClose, pathname, showCta }: MobileMenuPro
           })}
         </ul>
 
-        {showCta && (
-          <Button href="/contacts" size="lg" block className="mt-8" onClick={onClose}>
-            Оставить заявку
-          </Button>
-        )}
-
-        <ul className="mt-8 flex flex-col gap-3">
+        <ul className="mt-10 flex flex-col gap-3">
           {legalNav.map((item) => (
             <li key={item.href}>
               <Link

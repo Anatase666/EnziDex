@@ -1,5 +1,5 @@
 import { TODO_CONTENT } from './types';
-import type { ContactChannel, LeadTopic, NavItem, Requisites } from './types';
+import type { ContactChannel, NavItem, Requisites } from './types';
 
 /** Название, дескриптор, общие тексты бренда. */
 export const site = {
@@ -12,12 +12,16 @@ export const site = {
     'Гель с ферментом декстраназой для ухода за полостью рта. 10 мл, без фтора.',
 } as const;
 
-/** Основная навигация в шапке (ТЗ 2.2). */
+/**
+ * Основная навигация в шапке.
+ *
+ * Пункт «Контакты» убран вместе со страницей: сайт информационный,
+ * заявок и обращений не принимает.
+ */
 export const mainNav: readonly NavItem[] = [
   { label: 'Продукт', href: '/product', hint: 'Состав, свойства, применение' },
   { label: 'Научная база', href: '/science', hint: 'Механизм действия и источники' },
   { label: 'Вопросы', href: '/faq', hint: 'Безопасность и частые вопросы' },
-  { label: 'Контакты', href: '/contacts', hint: 'Связь и заявки' },
 ];
 
 /** Юридические ссылки — только в футере (ТЗ 2.2). */
@@ -41,48 +45,24 @@ export const requisites: Requisites = {
   actualAddress: TODO_CONTENT,
 };
 
-/** Прямые контакты (ТЗ FR-C2). */
+/**
+ * Справочные контакты изготовителя.
+ *
+ * Это пассивные сведения, а не приём обращений: форм и кнопок отправки на
+ * сайте нет. Колонка в футере выводится только когда заполнен хотя бы один
+ * канал, поэтому сейчас, пока данных нет, она не показывается вовсе.
+ */
 export const contacts: readonly ContactChannel[] = [
   {
     kind: 'email',
     label: 'Почта',
     value: TODO_CONTENT,
-    note: 'Общие вопросы и заявки',
   },
   {
     kind: 'phone',
     label: 'Телефон',
     value: TODO_CONTENT,
-    note: 'Часы работы уточняются',
   },
-  {
-    kind: 'messenger',
-    label: 'Мессенджер',
-    value: TODO_CONTENT,
-    note: 'Telegram / WhatsApp',
-  },
-];
-
-/** Отдельный адрес для партнёрств и поставок (ТЗ FR-C4). */
-export const partnershipContact: ContactChannel = {
-  kind: 'email',
-  label: 'Сотрудничество и поставки',
-  value: TODO_CONTENT,
-  note: 'Клиники, дистрибьюторы, партнёрские запросы',
-};
-
-/** Срок ответа на заявку (ТЗ FR-C5). Показывается в форме и после отправки. */
-export const responseTime = {
-  short: `в течение ${TODO_CONTENT}`,
-  full: `Мы отвечаем на заявки ${TODO_CONTENT} в рабочие дни.`,
-};
-
-/** Варианты в поле «Тип обращения» формы заявки (ТЗ FR-G3). */
-export const leadTopics: readonly LeadTopic[] = [
-  { value: 'customer', label: 'Я покупатель' },
-  { value: 'clinic', label: 'Я представитель клиники' },
-  { value: 'partnership', label: 'Партнёрство и поставки' },
-  { value: 'other', label: 'Другое' },
 ];
 
 /**

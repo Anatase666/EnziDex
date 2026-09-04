@@ -22,11 +22,6 @@ export function isFilled(value: string | undefined | null): value is string {
   return typeof value === 'string' && value.length > 0 && !value.includes(TODO_CONTENT);
 }
 
-/** Все элементы списка заполнены (пустой список считается незаполненным). */
-export function hasFilledItems<T>(items: readonly T[] | undefined): items is readonly T[] {
-  return Array.isArray(items) && items.length > 0;
-}
-
 /* ─── Навигация ────────────────────────────────────────────────────────── */
 
 export type NavItem = {
@@ -51,27 +46,6 @@ export type Ingredient = {
   isActive?: boolean;
 };
 
-/* ─── Преимущества ─────────────────────────────────────────────────────── */
-
-export type IconName =
-  | 'enzyme'
-  | 'shield'
-  | 'drop'
-  | 'layers'
-  | 'flask'
-  | 'clock'
-  | 'document'
-  | 'balance';
-
-export type Benefit = {
-  id: string;
-  title: string;
-  description: string;
-  icon?: IconName;
-  /** Развёрнутое объяснение для /product — там нужен не лозунг, а разбор. */
-  detail?: string;
-};
-
 /* ─── Применение ───────────────────────────────────────────────────────── */
 
 export type UsageStep = {
@@ -85,7 +59,11 @@ export type UsageStep = {
 
 /* ─── FAQ ──────────────────────────────────────────────────────────────── */
 
-export type FaqCategory = 'product' | 'safety' | 'usage' | 'partnership';
+/**
+ * Категория «partnership» убрана вместе с разделом о поставках:
+ * сайт информационный и обращений не принимает.
+ */
+export type FaqCategory = 'product' | 'safety' | 'usage';
 
 export type FaqItem = {
   id: string;
@@ -126,15 +104,6 @@ export type Reference = {
   relevance: string;
 };
 
-export type DocumentLink = {
-  title: string;
-  description?: string;
-  href: string;
-  /** Формат и размер указываются рядом со ссылкой (ТЗ FR-S6). */
-  format: 'PDF' | 'DOCX' | 'XLSX';
-  size: string;
-};
-
 /* ─── Реквизиты и контакты ─────────────────────────────────────────────── */
 
 export type Requisites = {
@@ -154,13 +123,6 @@ export type ContactChannel = {
   /** Готовая ссылка: mailto:, tel:, https://t.me/… */
   href?: string;
   note?: string;
-};
-
-/* ─── Форма заявки ─────────────────────────────────────────────────────── */
-
-export type LeadTopic = {
-  value: string;
-  label: string;
 };
 
 /* ─── SEO ──────────────────────────────────────────────────────────────── */

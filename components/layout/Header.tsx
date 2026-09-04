@@ -7,22 +7,25 @@ import { useEffect, useState } from 'react';
 import { Container } from './Container';
 import { Logo } from './Logo';
 import { MobileMenu } from './MobileMenu';
-import { Button } from '@/components/ui/Button';
 import { MenuIcon } from '@/components/icons';
 import { mainNav } from '@/content/site';
 import { cn } from '@/lib/cn';
-import { isActivePath, normalizePath } from '@/lib/paths';
+import { isActivePath } from '@/lib/paths';
 
 /** Порог появления фона у шапки, px (ТЗ FR-G1). */
 const SCROLL_THRESHOLD = 80;
 
+/**
+ * Шапка (ТЗ FR-G1 с учётом правок заказчика).
+ *
+ * Кнопка «Оставить заявку» убрана: сайт информационный и обращений не
+ * принимает. Вместе с ней исчезла и логика скрытия кнопки на странице
+ * контактов — самой страницы больше нет.
+ */
 export function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  /** На странице контактов вести на неё же незачем (ТЗ FR-G1). */
-  const showCta = normalizePath(pathname) !== '/contacts';
 
   useEffect(() => {
     // Чтение scrollY внутри rAF: обработчик скролла не должен вызывать
@@ -92,34 +95,21 @@ export function Header() {
               </ul>
             </nav>
 
-            <div className="flex items-center gap-2">
-              {/* Скрытие вынесено на обёртку, а не на саму кнопку: у Button
-                  в базовых классах уже есть inline-flex, и второй утилитой
-                  display на том же элементе управлять нельзя — какая из двух
-                  победит, решает порядок правил в собранном CSS, а не порядок
-                  слов в className. */}
-              {showCta && (
-                <div className="hidden lg:block">
-                  <Button href="/contacts">Оставить заявку</Button>
-                </div>
-              )}
-
-              <button
-                type="button"
-                onClick={() => setIsMenuOpen(true)}
-                aria-label="Открыть меню"
-                aria-expanded={isMenuOpen}
-                // Панель размонтирована, пока меню закрыто, поэтому
-                // aria-controls ставится только когда цель существует:
-                // ссылка на несуществующий id — висячая, и скринридер
-                // сообщает о ней как об ошибке разметки. Состояние при
-                // этом всё равно передаётся через aria-expanded.
-                aria-controls={isMenuOpen ? 'mobile-menu' : undefined}
-                className="-mr-2 inline-flex size-11 items-center justify-center rounded-lg text-ink transition-colors hover:bg-sunken lg:hidden"
-              >
-                <MenuIcon className="size-6" aria-hidden="true" />
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={() => setIsMenuOpen(true)}
+              aria-label="Открыть меню"
+              aria-expanded={isMenuOpen}
+              // Панель размонтирована, пока меню закрыто, поэтому
+              // aria-controls ставится только когда цель существует:
+              // ссылка на несуществующий id — висячая, и скринридер
+              // сообщает о ней как об ошибке разметки. Состояние при
+              // этом всё равно передаётся через aria-expanded.
+              aria-controls={isMenuOpen ? 'mobile-menu' : undefined}
+              className="-mr-2 inline-flex size-11 items-center justify-center rounded-lg text-ink transition-colors hover:bg-sunken lg:hidden"
+            >
+              <MenuIcon className="size-6" aria-hidden="true" />
+            </button>
           </div>
         </Container>
       </header>
@@ -128,7 +118,6 @@ export function Header() {
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         pathname={pathname}
-        showCta={showCta}
       />
     </>
   );
