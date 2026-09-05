@@ -4,23 +4,32 @@ import { Button } from '@/components/ui/Button';
 import { hero } from '@/content/home';
 
 /**
- * Первый экран (ТЗ FR-H1 с учётом правок заказчика).
+ * Первый экран (ТЗ FR-H1, переработан по правкам заказчика).
  *
- * Кнопка «Оставить заявку» убрана вместе со всей механикой заявок: сайт
- * ничего не принимает и не отправляет. Осталась одна кнопка — переход к
- * разбору механизма, и она же теперь основная.
+ * Композиция переставлена: раньше текст и картинка стояли двумя равными
+ * колонками, теперь упаковка крупная и вынесена на светящуюся подложку —
+ * продукт показан лицом, как и просили. Текст занимает шесть колонок из
+ * двенадцати, упаковка — пять, между ними колонка воздуха.
  *
- * Справа — объёмная визуализация упаковки вместо прежней абстрактной схемы.
- * Над заголовком нет капслок-лейбла, в заголовке нет слова, выделенного
- * цветом, у кнопки нет стрелки — всё это ТЗ 7.4 называет шаблонными
- * приёмами. Иерархию держат кегль, вес и воздух.
+ * Фон первого экрана — мягкий фиалковый градиент, растворяющийся в фоне
+ * страницы. Это единственный градиент на сайте: он отделяет первый экран
+ * от остального без линейки и без капслок-лейбла, запрещённого ТЗ 7.4.
+ *
+ * Кнопка одна. Вторая («Оставить заявку») убрана вместе со всей механикой
+ * обращений, и оставшаяся стала основной.
  */
 export function Hero() {
   return (
-    <section className="pt-10 pb-16 md:pt-16 md:pb-20 lg:pt-20 lg:pb-28">
+    <section className="relative overflow-hidden pt-10 pb-14 md:pt-16 md:pb-20 lg:pt-20">
+      {/* Подложка первого экрана. aria-hidden: это чистая декорация. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] bg-linear-to-b from-accent-soft/70 via-accent-soft/20 to-transparent"
+      />
+
       <Container>
-        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-7 xl:col-span-6">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-6">
+          <div className="lg:col-span-6">
             <h1 className="text-hero text-ink">{hero.heading}</h1>
 
             <p className="mt-6 max-w-measure text-lg text-ink-muted md:mt-7">
@@ -32,23 +41,31 @@ export function Hero() {
                 {hero.cta.label}
               </Button>
             </div>
-
-            {/* Короткие факты вместо декоративных «цифр достижений»:
-                каждый из них проверяется по составу и упаковке. */}
-            <dl className="mt-12 grid gap-x-8 gap-y-6 border-t border-hairline pt-8 sm:grid-cols-3">
-              {hero.facts.map((fact) => (
-                <div key={fact.label}>
-                  <dt className="text-sm text-ink-muted">{fact.label}</dt>
-                  <dd className="mt-1 font-medium text-ink">{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
           </div>
 
-          <div className="lg:col-span-5 xl:col-span-6">
-            <PackageRender className="mx-auto max-w-md lg:max-w-lg" />
+          <div className="lg:col-span-6 lg:pl-6">
+            <PackageRender className="mx-auto max-w-sm sm:max-w-md lg:max-w-full" />
           </div>
         </div>
+
+        {/* Факты вынесены под обе колонки и разделены вертикальными линиями:
+            так они читаются как характеристики продукта, а не как ещё один
+            блок текста под заголовком. */}
+        <dl className="mt-12 grid border-t border-hairline pt-8 sm:grid-cols-3 sm:gap-x-8 md:mt-16">
+          {hero.facts.map((fact, index) => (
+            <div
+              key={fact.label}
+              className={
+                index > 0
+                  ? 'mt-5 sm:mt-0 sm:border-l sm:border-hairline sm:pl-8'
+                  : undefined
+              }
+            >
+              <dt className="text-sm text-ink-muted">{fact.label}</dt>
+              <dd className="mt-1 text-lg font-medium text-ink">{fact.value}</dd>
+            </div>
+          ))}
+        </dl>
       </Container>
     </section>
   );

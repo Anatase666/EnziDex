@@ -24,6 +24,7 @@ export function Usage() {
 
   return (
     <Section
+      tone="surface"
       heading={usageSection.heading}
       lead={hasSteps ? usageSection.lead : undefined}
       action={

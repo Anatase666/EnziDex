@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 
 import { Composition } from '@/components/sections/Composition';
-import { FaqPreview } from '@/components/sections/FaqPreview';
 import { Hero } from '@/components/sections/Hero';
 import { Problem } from '@/components/sections/Problem';
 import { Solution } from '@/components/sections/Solution';
@@ -11,19 +10,19 @@ import { buildMetadata } from '@/lib/seo';
 export const metadata: Metadata = buildMetadata('home');
 
 /**
- * Главная (ТЗ 4.1 с учётом правок заказчика).
+ * Главная (ТЗ 4.1, переработана по правкам заказчика).
  *
- * Порядок секций задаёт маршрут чтения: что это (Hero) → почему это трудно
- * решить привычными средствами (Problem) → что делаем мы (Solution) →
- * из чего сделано (Composition) → как применять (Usage) → что спрашивают
- * (FaqPreview).
+ * Маршрут чтения: что это (Hero) → почему привычными средствами трудно
+ * (Problem) → что делаем мы (Solution) → из чего сделано (Composition) →
+ * как применять (Usage).
  *
- * Убраны: блок «Что следует из состава», сетка стадий механизма с оговоркой
- * и финальный блок с формой «Получить консультацию». Страница заканчивается
- * вопросами, а не призывом к действию, — сайт информационный.
+ * Ритм страницы задан чередованием плоскостей: светлый градиент первого
+ * экрана → тёмная полоса проблемы → фон страницы → белые карточки состава
+ * на фоне страницы → белая полоса применения. Тёмная полоса одна: это
+ * главный контраст сайта, и второе такое пятно обесценило бы первое.
  *
- * Чередование фонов page/surface разбивает страницу на смысловые блоки без
- * капслок-лейблов и анимаций появления, запрещённых ТЗ 7.4.
+ * Блок частых вопросов убран — страница ведёт в разделы, а не пересказывает
+ * их. Призывов к действию нет: сайт информационный.
  */
 export default function HomePage() {
   return (
@@ -33,7 +32,6 @@ export default function HomePage() {
       <Solution />
       <Composition />
       <Usage />
-      <FaqPreview />
     </>
   );
 }
