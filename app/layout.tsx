@@ -52,7 +52,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   // Цвет строки состояния в мобильных браузерах — фон страницы,
   // чтобы шапка не выглядела приклеенной к чужой полосе.
-  themeColor: '#eef3f2',
+  themeColor: '#f1eff9',
 };
 
 export default function RootLayout({

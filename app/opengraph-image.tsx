@@ -68,21 +68,21 @@ export default async function OpengraphImage() {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          backgroundColor: '#EEF3F2',
+          backgroundColor: '#F1EFF9',
           fontFamily: 'Onest',
           padding: '72px 80px',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
           <svg width="60" height="60" viewBox="0 0 32 32" fill="none">
-            <circle cx="10.4" cy="19.4" r="4.1" stroke="#1E7F72" strokeWidth="2.4" />
-            <circle cx="19.6" cy="10.2" r="4.1" stroke="#1E7F72" strokeWidth="2.4" />
-            <path d="M13.6 16.3 L 16.4 13.4" stroke="#1E7F72" strokeWidth="2.4" strokeLinecap="round" />
-            <path d="M23.2 15.6 L 25.2 17.8" stroke="#1E7F72" strokeWidth="2.4" strokeLinecap="round" opacity="0.45" />
-            <path d="M24.6 22.6 L 22.4 24.6" stroke="#1E7F72" strokeWidth="2.4" strokeLinecap="round" opacity="0.45" />
+            <circle cx="10.4" cy="19.4" r="4.1" stroke="#6830E0" strokeWidth="2.4" />
+            <circle cx="19.6" cy="10.2" r="4.1" stroke="#6830E0" strokeWidth="2.4" />
+            <path d="M13.6 16.3 L 16.4 13.4" stroke="#6830E0" strokeWidth="2.4" strokeLinecap="round" />
+            <path d="M23.2 15.6 L 25.2 17.8" stroke="#6830E0" strokeWidth="2.4" strokeLinecap="round" opacity="0.45" />
+            <path d="M24.6 22.6 L 22.4 24.6" stroke="#6830E0" strokeWidth="2.4" strokeLinecap="round" opacity="0.45" />
           </svg>
 
-          <span style={{ fontSize: 40, fontWeight: 600, color: '#10202A' }}>ЭнзиДекс</span>
+          <span style={{ fontSize: 40, fontWeight: 600, color: '#171A45' }}>ЭнзиДекс</span>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -90,7 +90,7 @@ export default async function OpengraphImage() {
             style={{
               fontSize: 68,
               fontWeight: 600,
-              color: '#10202A',
+              color: '#171A45',
               lineHeight: 1.12,
               letterSpacing: '-0.025em',
               maxWidth: 900,
@@ -99,13 +99,13 @@ export default async function OpengraphImage() {
             Гель с ферментом, который расщепляет каркас зубного налёта
           </span>
 
-          <span style={{ fontSize: 30, color: '#5A6B72', marginTop: 28 }}>
+          <span style={{ fontSize: 30, color: '#5F5D80', marginTop: 28 }}>
             Декстраназа · 10 мл · без фтора и абразивных частиц
           </span>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <div style={{ display: 'flex', width: 120, height: 5, backgroundColor: '#1E7F72' }} />
+          <div style={{ display: 'flex', width: 120, height: 5, backgroundColor: '#6830E0' }} />
         </div>
       </div>
     ),

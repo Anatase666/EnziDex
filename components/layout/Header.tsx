@@ -57,7 +57,11 @@ export function Header() {
         className={cn(
           'sticky top-0 z-40 transition-colors duration-200',
           isScrolled
-            ? 'border-b border-hairline bg-page/85 backdrop-blur-md'
+            // 92 %, а не 85 %: над тёмной полосой «Почему налёт так трудно
+            // убрать» просвечивающий фон темнеет, и приглушённые пункты меню
+            // проваливались до 4.05 : 1 — ниже порога AA. При 92 % выходит
+            // 4.6 : 1, а эффект стекла на глаз остаётся.
+            ? 'border-b border-hairline bg-page/92 backdrop-blur-md'
             : 'border-b border-transparent bg-transparent',
         )}
       >
