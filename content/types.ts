@@ -106,31 +106,6 @@ export type MutantResult = {
   isReference?: boolean;
 };
 
-export type LabTest = {
-  title: string;
-  method: string;
-  result: string;
-  /** in vitro / in vivo — обязательная пометка по BC-3. */
-  conditions: 'in vitro' | 'in vivo';
-  date: string;
-  /** Кто проводил испытание. */
-  performedBy?: string;
-  sourceUrl?: string;
-};
-
-export type Reference = {
-  /** Авторы в формате «Фамилия И. О., Фамилия И. О.». */
-  authors: string;
-  year: string;
-  title: string;
-  /** Журнал или издание. */
-  source: string;
-  doi?: string;
-  url?: string;
-  /** Зачем эта работа здесь — одной строкой. */
-  relevance: string;
-};
-
 /* ─── Реквизиты и контакты ─────────────────────────────────────────────── */
 
 export type Requisites = {

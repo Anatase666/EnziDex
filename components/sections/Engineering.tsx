@@ -3,25 +3,41 @@ import { Value } from '@/components/ui/Value';
 import { engineering, enzymeProperties } from '@/content/science';
 
 /**
- * Инженерия фермента (ТЗ FR-S1).
+ * Выигрыш модифицированного фермента над природным (ТЗ FR-S1).
  *
- * Смысловой центр научного раздела: объясняет, почему продукт вообще
- * потребовал научной работы, а не сводится к «взяли фермент и смешали
- * с гелевой основой». Природная декстраназа работает при кислотности и
- * температуре, которых в полости рта не бывает, — и это пришлось менять.
+ * Смысловой центр научного раздела и единственное место, где показана
+ * работоспособность собственной разработки. Раздел перестроен с постановки
+ * задачи на результат: сверху три числа, ниже объяснение, зачем и как
+ * фермент меняли, и таблица «до и после».
  *
- * Таблица свойств сопоставляет исходную форму с модифицированной. Там,
- * где измерения ещё нет, стоит пометка, а не прочерк: прочерк читался бы
- * как «не изменилось».
+ * Числа набраны крупно и стоят до текста намеренно. Читатель, который не
+ * станет разбираться в направленном мутагенезе, всё равно унесёт главное:
+ * активность вдвое выше, эффективность в шесть раз, и фермент работает
+ * при температуре тела.
+ *
+ * В таблице там, где измерения ещё нет, стоит пометка, а не прочерк:
+ * прочерк читался бы как «не изменилось».
  */
 export function Engineering() {
   return (
-    <Section
-      id="engineering"
-      heading={engineering.heading}
-      lead={engineering.lead}
-    >
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <Section id="engineering" heading={engineering.heading} lead={engineering.lead}>
+      <dl className="grid gap-px overflow-hidden rounded-xl border border-hairline bg-hairline sm:grid-cols-3">
+        {engineering.gains.map((gain) => (
+          <div key={gain.title} className="bg-surface p-6 md:p-7">
+            <dt>
+              <span className="block text-4xl font-semibold tracking-tight text-accent-ink">
+                {gain.value}
+              </span>
+              <span className="mt-3 block text-lg font-semibold text-ink">
+                {gain.title}
+              </span>
+            </dt>
+            <dd className="mt-2 text-ink-muted">{gain.description}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-7">
           <div className="flex max-w-measure flex-col gap-5 text-lg text-ink-muted">
             {engineering.paragraphs.map((paragraph) => (

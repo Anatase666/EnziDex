@@ -1,8 +1,7 @@
 import { Section } from '@/components/layout/Section';
-import { Disclaimer } from '@/components/ui/Disclaimer';
 import { Value } from '@/components/ui/Value';
 import { usageNotes, usageSteps } from '@/content/product';
-import { isFilled } from '@/content/types';
+import { TODO_CONTENT, isFilled } from '@/content/types';
 
 const NOTE_LABELS: { key: keyof typeof usageNotes; label: string }[] = [
   { key: 'frequency', label: 'Частота применения' },
@@ -14,6 +13,11 @@ const NOTE_LABELS: { key: keyof typeof usageNotes; label: string }[] = [
 /**
  * Развёрнутый режим применения (ТЗ FR-P4).
  *
+ * Как и на главной, от раздела осталась только надпись: под заголовком
+ * стоит пометка «Требует корректировки», пока инструкция изготовителя не
+ * получена. Шаги, частота и длительность курса появятся автоматически,
+ * когда usageSteps и usageNotes будут заполнены.
+ *
  * Нумерация шагов — единственное разрешённое ТЗ 7.4 место для цифр:
  * здесь последовательность действительно является последовательностью.
  */
@@ -24,16 +28,7 @@ export function UsageDetailed() {
   const hasNotes = NOTE_LABELS.some(({ key }) => isFilled(usageNotes[key]));
 
   return (
-    <Section
-      id="usage"
-      tone="surface"
-      heading="Как использовать"
-      lead={
-        hasSteps
-          ? 'Порядок действий по инструкции изготовителя. Отклоняться от него не следует: время контакта фермента с поверхностью влияет на результат.'
-          : undefined
-      }
-    >
+    <Section id="usage" tone="surface" heading="Инструкция по применению">
       {hasSteps ? (
         <>
           <ol className="grid gap-10 lg:grid-cols-3">
@@ -71,9 +66,9 @@ export function UsageDetailed() {
           )}
         </>
       ) : (
-        <Disclaimer tone="gap" title="Инструкция по применению готовится">
-          {`Количество геля на одно применение, время выдержки, частота и длительность курса, а также рекомендации до и после — всё это части утверждённой инструкции изготовителя. Эти параметры не выводятся из состава и не могут быть предположены: от них зависит и результат, и безопасность.\n\nРаздел заполняется сразу после получения инструкции. До этого момента единственный достоверный источник — вкладыш в упаковке продукта.`}
-        </Disclaimer>
+        <p className="text-lg">
+          <Value value={TODO_CONTENT} />
+        </p>
       )}
     </Section>
   );

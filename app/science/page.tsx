@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 
 import { Engineering } from '@/components/sections/Engineering';
-import { EnzymeOrigin } from '@/components/sections/EnzymeOrigin';
 import { Mechanism } from '@/components/sections/Mechanism';
 import { MutantResults } from '@/components/sections/MutantResults';
-import { References } from '@/components/sections/References';
 import { Container } from '@/components/layout/Container';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { pageSeo } from '@/content/seo';
@@ -42,10 +40,8 @@ export default function SciencePage() {
       </section>
 
       <Mechanism />
-      <EnzymeOrigin />
       <Engineering />
       <MutantResults />
-      <References />
 
       <JsonLd data={breadcrumbJsonLd('science')} />
     </>

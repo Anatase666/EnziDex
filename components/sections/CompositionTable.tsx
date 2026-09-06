@@ -70,11 +70,7 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
   if (headless) return content;
 
   return (
-    <Section
-      id="composition"
-      heading="Состав"
-      lead="Десять компонентов в том же порядке, что и на упаковке. Порядок означает убывание концентрации, поэтому по нему видно и то, чего в продукте нет."
-    >
+    <Section id="composition" heading="Состав">
       {content}
     </Section>
   );

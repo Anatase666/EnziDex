@@ -1,21 +1,19 @@
-import Link from 'next/link';
-
 import { Section } from '@/components/layout/Section';
-import { Disclaimer } from '@/components/ui/Disclaimer';
+import { Value } from '@/components/ui/Value';
 import { usageSection } from '@/content/home';
 import { usageSteps } from '@/content/product';
-import { isFilled } from '@/content/types';
+import { TODO_CONTENT, isFilled } from '@/content/types';
 
 /**
  * Режим применения (ТЗ FR-H6).
  *
- * Единственный раздел сайта, где нумерация уместна и разрешена ТЗ 7.4:
- * здесь порядок действий содержателен, а не декоративен.
+ * По просьбе заказчика от раздела осталась только надпись: пока инструкция
+ * изготовителя не получена, под заголовком стоит пометка «Требует
+ * корректировки» — та же, что и в остальных незаполненных местах сайта.
  *
- * Пока инструкция изготовителя не получена, вместо трёх пустых шагов
- * выводится честная оговорка. Показывать нумерованный список из строк
- * заглушек — худший вариант: он выглядит как недоделанная вёрстка,
- * хотя проблема не в вёрстке, а в отсутствии данных.
+ * Нумерованный список появится сам, как только usageSteps в content/product.ts
+ * будут заполнены. Это единственный раздел сайта, где нумерация уместна и
+ * разрешена ТЗ 7.4: здесь порядок действий содержателен, а не декоративен.
  */
 export function Usage() {
   const hasSteps = usageSteps.some(
@@ -23,16 +21,7 @@ export function Usage() {
   );
 
   return (
-    <Section
-      tone="surface"
-      heading={usageSection.heading}
-      lead={hasSteps ? usageSection.lead : undefined}
-      action={
-        <Link href={usageSection.moreLink.href} className="link">
-          {usageSection.moreLink.label}
-        </Link>
-      }
-    >
+    <Section tone="surface" heading={usageSection.heading}>
       {hasSteps ? (
         <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           {usageSteps.map((step, index) => (
@@ -55,9 +44,9 @@ export function Usage() {
           ))}
         </ol>
       ) : (
-        <Disclaimer tone="gap" title="Инструкция по применению готовится">
-          {`Порядок нанесения, количество геля, время выдержки и длительность курса — часть утверждённой инструкции изготовителя. Придумать эти параметры нельзя: от них зависит и результат, и безопасность применения.\n\nРаздел будет заполнен сразу после получения инструкции. До этого момента ориентируйтесь на вкладыш в упаковке продукта.`}
-        </Disclaimer>
+        <p className="text-lg">
+          <Value value={TODO_CONTENT} />
+        </p>
       )}
     </Section>
   );

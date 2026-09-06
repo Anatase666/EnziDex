@@ -65,13 +65,3 @@ export function CloseIcon(props: IconProps) {
   );
 }
 
-/** Внешняя ссылка: открытие в новой вкладке. */
-export function ExternalIcon(props: IconProps) {
-  return (
-    <Icon {...props}>
-      <path d="M14 4h6v6" />
-      <path d="M20 4 11 13" />
-      <path d="M18 14.5V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.5" />
-    </Icon>
-  );
-}

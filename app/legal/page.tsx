@@ -1,20 +1,15 @@
 import type { Metadata } from 'next';
 
-import { CompositionTable } from '@/components/sections/CompositionTable';
 import { Container } from '@/components/layout/Container';
 import { Section } from '@/components/layout/Section';
 import { Disclaimer } from '@/components/ui/Disclaimer';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { Value } from '@/components/ui/Value';
-import { legalPage, marking } from '@/content/legal';
-import { ingredients } from '@/content/product';
+import { legalPage } from '@/content/legal';
 import { requisites } from '@/content/site';
 import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata('legal');
-
-/** Строка состава ровно в том виде, в каком она читается на упаковке. */
-const inciLine = ingredients.map((ingredient) => ingredient.inci).join(', ');
 
 const REQUISITE_ROWS: { label: string; value: string }[] = [
   { label: 'Полное наименование', value: requisites.legalName },
@@ -61,53 +56,19 @@ export default function LegalPage() {
         </dl>
       </Section>
 
-      {/* FR-L2 */}
-      <Section
-        id="composition-line"
-        tone="surface"
-        heading="Состав по INCI"
-        lead="Приведён в порядке убывания концентрации, как на упаковке. При расхождении с упаковкой приоритет имеет упаковка."
-        size="compact"
-      >
-        <p className="max-w-4xl rounded-xl bg-sunken px-5 py-5 font-mono text-base leading-relaxed tracking-tight text-ink">
-          {inciLine}
-        </p>
-
-        <div className="mt-10">
-          <CompositionTable headless />
-        </div>
-      </Section>
-
-      {/* FR-L3 */}
-      <Section id="marking" heading="Данные маркировки" size="compact">
-        <dl className="max-w-3xl divide-y divide-hairline border-y border-hairline">
-          {marking.map((row) => (
-            <div
-              key={row.label}
-              className="grid gap-1 py-4 sm:grid-cols-[minmax(0,16rem)_1fr] sm:gap-6"
-            >
-              <dt className="text-ink-muted">{row.label}</dt>
-              <dd className="text-ink">
-                <Value value={row.value} />
-                {row.note && (
-                  <span className="mt-1 block text-sm text-ink-muted">{row.note}</span>
-                )}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
-
-      {/* Блоки «Регуляторный статус» (FR-L4) и «Условия использования сайта»
-          (FR-L5) убраны вместе с их текстами из content/legal.ts. */}
+      {/* От страницы остались только реквизиты. Убраны по просьбе заказчика:
+          «Состав по INCI» (FR-L2) и «Данные маркировки» (FR-L3) — этой
+          правкой; «Регуляторный статус» (FR-L4) и «Условия использования
+          сайта» (FR-L5) — предыдущей, вместе с их текстами.
+          Полный состав и характеристики продукта остались на /product. */}
 
       <section className="pb-16 md:pb-20">
         <Container>
           <Disclaimer title="Сведения на этой странице">
-            Реквизиты, состав и данные маркировки публикуются по информации
-            изготовителя. Часть полей ещё не предоставлена и помечена как
-            уточняемая — мы не заполняем их предположениями. При расхождении
-            с упаковкой приоритет имеет упаковка.
+            Реквизиты публикуются по информации изготовителя. Часть полей ещё
+            не предоставлена и помечена как уточняемая — мы не заполняем их
+            предположениями. Состав продукта приведён на странице «Продукт»;
+            при расхождении с упаковкой приоритет имеет упаковка.
           </Disclaimer>
         </Container>
       </section>
