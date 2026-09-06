@@ -19,7 +19,7 @@ Next.js 16 (App Router), TypeScript strict, Tailwind CSS v4, статическ�
 
 ## Страницы
 
-`/` · `/product` · `/science` · `/faq` · `/legal` · `/privacy` · 404
+`/` · `/product` · `/science` · `/faq` · `/legal` · 404
 
 ## Сайт информационный
 

@@ -4,22 +4,19 @@ import type { Ingredient, UsageStep } from './types';
 /** Паспорт продукта (ТЗ FR-P1). */
 export const productCard = {
   title: 'ЭнзиДекс',
-  subtitle: 'Гель для ухода за полостью рта с ферментом декстраназой',
+  subtitle: 'Гель для ухода за полостью рта',
   /** Атрибуты, известные достоверно из ТЗ 1.1. */
   attributes: [
     { label: 'Форма выпуска', value: 'Гель' },
     { label: 'Объём', value: '10 мл' },
     {
       label: 'Действующий компонент',
-      value: 'Рекомбинантная α-1,6-глюкозидгидролаза (декстраназа), КФ 3.2.1.11',
+      value: 'Декстраназа (рекомбинантная α-1,6-глюкозидгидролаза)',
     },
-    { label: 'Семейство фермента', value: 'GH49, гликозидгидролазы' },
-    { label: 'Источник гена', value: 'Penicillium funiculosum' },
-    { label: 'Штамм-продуцент', value: 'Pichia pastoris GS115 (Komagataella phaffii)' },
+    { label: 'Семейство фермента', value: 'Гликозидгидролазы' },
     { label: 'Фториды', value: 'Не содержит' },
     { label: 'Абразивные частицы', value: 'Не содержит' },
     { label: 'Изготовитель', value: 'ООО «ЭНЗИДЕКС», Пермский край, РФ' },
-    { label: 'Регуляторный статус', value: TODO_CONTENT },
     { label: 'Срок годности', value: TODO_CONTENT },
     { label: 'Условия хранения', value: TODO_CONTENT },
   ],

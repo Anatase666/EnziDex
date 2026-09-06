@@ -6,7 +6,7 @@ import { Section } from '@/components/layout/Section';
 import { Disclaimer } from '@/components/ui/Disclaimer';
 import { JsonLd } from '@/components/ui/JsonLd';
 import { Value } from '@/components/ui/Value';
-import { legalPage, marking, regulatory, siteTerms } from '@/content/legal';
+import { legalPage, marking } from '@/content/legal';
 import { ingredients } from '@/content/product';
 import { requisites } from '@/content/site';
 import { breadcrumbJsonLd, buildMetadata } from '@/lib/seo';
@@ -98,46 +98,16 @@ export default function LegalPage() {
         </dl>
       </Section>
 
-      {/* FR-L4 */}
-      <Section id="regulatory" tone="surface" heading={regulatory.heading} size="compact">
-        <div className="max-w-measure">
-          <dl className="divide-y divide-hairline border-y border-hairline">
-            <div className="grid gap-1 py-4 sm:grid-cols-[minmax(0,16rem)_1fr] sm:gap-6">
-              <dt className="text-ink-muted">Категория продукции</dt>
-              <dd className="text-ink">
-                <Value value={regulatory.status} />
-              </dd>
-            </div>
-            <div className="grid gap-1 py-4 sm:grid-cols-[minmax(0,16rem)_1fr] sm:gap-6">
-              <dt className="text-ink-muted">Номер документа</dt>
-              <dd className="text-ink">
-                <Value value={regulatory.documentNumber} />
-              </dd>
-            </div>
-          </dl>
-
-          <p className="mt-6 text-ink-muted">{regulatory.explanation}</p>
-        </div>
-      </Section>
-
-      {/* FR-L5 */}
-      <Section id="terms" heading={siteTerms.heading} size="compact" containerWidth="measure">
-        <div className="flex flex-col gap-8">
-          {siteTerms.blocks.map((block) => (
-            <div key={block.title}>
-              <h3 className="text-xl font-semibold text-ink">{block.title}</h3>
-              <p className="mt-2.5 text-ink-muted">{block.body}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
+      {/* Блоки «Регуляторный статус» (FR-L4) и «Условия использования сайта»
+          (FR-L5) убраны вместе с их текстами из content/legal.ts. */}
 
       <section className="pb-16 md:pb-20">
         <Container>
           <Disclaimer title="Сведения на этой странице">
-            Реквизиты, регуляторный статус и данные маркировки публикуются по
-            информации изготовителя. Часть полей ещё не предоставлена и помечена
-            как уточняемая — мы не заполняем их предположениями.
+            Реквизиты, состав и данные маркировки публикуются по информации
+            изготовителя. Часть полей ещё не предоставлена и помечена как
+            уточняемая — мы не заполняем их предположениями. При расхождении
+            с упаковкой приоритет имеет упаковка.
           </Disclaimer>
         </Container>
       </section>

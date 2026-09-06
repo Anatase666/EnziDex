@@ -20,7 +20,6 @@ export function Composition() {
   return (
     <Section
       heading={compositionSection.heading}
-      lead={compositionSection.lead}
       action={
         <Link href={compositionSection.fullLink.href} className="link">
           {compositionSection.fullLink.label}
