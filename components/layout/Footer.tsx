@@ -40,17 +40,20 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-hairline bg-surface">
       <Container>
-        <div className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+        {/* Один компактный ряд: бренд, разделы, изготовитель. Реквизитов
+            всего два, поэтому отдельная полоса под ними не нужна — они стоят
+            третьей колонкой рядом с навигацией. */}
+        <div className="grid gap-8 py-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           {/* Бренд */}
-          <div className="lg:col-span-6">
+          <div className="sm:col-span-2 lg:col-span-4">
             <Logo withDescriptor={false} />
-            <p className="mt-4 max-w-xs text-sm text-ink-muted">{footer.brandNote}</p>
+            <p className="mt-3 max-w-xs text-sm text-ink-muted">{footer.brandNote}</p>
           </div>
 
           {/* Навигация */}
           <nav aria-label="Разделы сайта" className="lg:col-span-3">
             <h2 className="text-sm font-semibold text-ink">{footer.navHeading}</h2>
-            <ul className="mt-4 flex flex-col gap-3">
+            <ul className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2">
               {mainNav.map((item) => (
                 <li key={item.href}>
                   <Link
@@ -64,11 +67,28 @@ export function Footer() {
             </ul>
           </nav>
 
+          {/* Изготовитель. Наименование стоит сразу под заголовком:
+              отдельная подпись с тем же словом читалась бы как повтор. */}
+          <div className="lg:col-span-5">
+            <h2 className="text-sm font-semibold text-ink">{footer.requisitesHeading}</h2>
+            <p className="mt-3 text-sm text-ink">{requisites.shortName}</p>
+            <dl className="mt-2 flex flex-col gap-1 text-sm">
+              {REQUISITE_KEYS.map((key) => (
+                <div key={key} className="flex flex-wrap gap-x-2">
+                  <dt className="text-ink-muted">{requisiteLabels[key]}:</dt>
+                  <dd className="text-ink">
+                    <Value value={requisites[key] ?? ''} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
           {/* Контакты — только если есть что показать */}
           {visibleContacts.length > 0 && (
             <div className="lg:col-span-3">
               <h2 className="text-sm font-semibold text-ink">{footer.contactsHeading}</h2>
-              <ul className="mt-4 flex flex-col gap-3">
+              <ul className="mt-3 flex flex-col gap-2">
                 {visibleContacts.map((channel) => (
                   <li key={channel.kind} className="text-sm">
                     <span className="block text-ink-muted">{channel.label}</span>
@@ -90,28 +110,9 @@ export function Footer() {
           )}
         </div>
 
-        {/* Реквизиты изготовителя, копирайт, дисклеймер */}
-        <div className="border-t border-hairline py-8">
-          {/* Наименование стоит сразу под заголовком «Изготовитель»:
-              отдельная подпись с тем же словом читалась бы как повтор. */}
-          <h2 className="text-sm font-semibold text-ink">{footer.requisitesHeading}</h2>
-          <p className="mt-2 text-sm text-ink">{requisites.shortName}</p>
-
-          <dl className="mt-4 grid gap-x-8 gap-y-4 text-sm sm:grid-cols-2">
-            {REQUISITE_KEYS.map((key) => (
-              <div key={key}>
-                <dt className="text-ink-muted">{requisiteLabels[key]}</dt>
-                <dd className="mt-0.5 text-ink">
-                  <Value value={requisites[key] ?? ''} />
-                </dd>
-              </div>
-            ))}
-          </dl>
-
-          <p className="mt-8 max-w-3xl border-t border-hairline pt-6 text-sm text-ink-muted">
-            © {year} {requisites.shortName}. {footerDisclaimer}
-          </p>
-        </div>
+        <p className="border-t border-hairline py-5 text-xs text-ink-muted">
+          © {year} {requisites.shortName}. {footerDisclaimer}
+        </p>
       </Container>
     </footer>
   );
