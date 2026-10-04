@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Container } from '@/components/layout/Container';
-import { notFoundPage } from '@/content/legal';
+import { notFoundPage } from '@/content/site';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata('notFound');

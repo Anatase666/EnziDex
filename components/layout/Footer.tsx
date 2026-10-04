@@ -8,8 +8,8 @@ import {
   contacts,
   footer,
   footerDisclaimer,
-  legalNav,
   mainNav,
+  requisiteLabels,
   requisites,
   site,
 } from '@/content/site';
@@ -23,10 +23,17 @@ import { isFilled } from '@/content/types';
  * решением убрать с сайта раздел контактов: показывать столбец из трёх
  * строк-заглушек было бы хуже, чем не показывать ничего.
  *
+ * Отдельной страницы «Юридические данные» нет: реквизиты изготовителя
+ * выводятся в нижней части подвала, как это принято на сайтах, — то есть
+ * внизу каждой страницы, включая главную. Незаполненные поля видны как
+ * «Требует корректировки».
+ *
  * Год подставляется на этапе сборки: сайт статический, и это ровно тот
  * случай, когда вычислять дату в браузере не нужно — достаточно
  * пересобрать сайт, что и так происходит при любой правке контента.
  */
+const REQUISITE_KEYS = ['inn', 'ogrn', 'kpp', 'legalAddress', 'actualAddress'] as const;
+
 export function Footer() {
   const year = new Date().getFullYear();
   const visibleContacts = contacts.filter((channel) => isFilled(channel.value));
@@ -36,7 +43,7 @@ export function Footer() {
       <Container>
         <div className="grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* Бренд */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-6">
             <Logo withDescriptor={false} />
             <p className="mt-4 max-w-xs text-sm text-ink-muted">{footer.brandNote}</p>
             <p className="mt-3 max-w-xs text-sm text-ink-muted">{site.tagline}</p>
@@ -61,7 +68,7 @@ export function Footer() {
 
           {/* Контакты — только если есть что показать */}
           {visibleContacts.length > 0 && (
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-3">
               <h2 className="text-sm font-semibold text-ink">{footer.contactsHeading}</h2>
               <ul className="mt-4 flex flex-col gap-3">
                 {visibleContacts.map((channel) => (
@@ -83,33 +90,26 @@ export function Footer() {
               </ul>
             </div>
           )}
-
-          {/* Документы */}
-          <nav aria-label="Юридические документы" className="lg:col-span-2">
-            <h2 className="text-sm font-semibold text-ink">{footer.legalHeading}</h2>
-            <ul className="mt-4 flex flex-col gap-3">
-              {legalNav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-ink-muted transition-colors hover:text-accent-ink"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
 
-        {/* Нижняя строка */}
+        {/* Реквизиты изготовителя, копирайт, дисклеймер */}
         <div className="border-t border-hairline py-8">
-          <p className="text-sm text-ink-muted">
+          <h2 className="text-sm font-semibold text-ink">{footer.requisitesHeading}</h2>
+          <p className="mt-2 text-sm text-ink">{requisites.legalName}</p>
+
+          <dl className="mt-4 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-3 lg:grid-cols-5">
+            {REQUISITE_KEYS.map((key) => (
+              <div key={key}>
+                <dt className="text-ink-muted">{requisiteLabels[key]}</dt>
+                <dd className="mt-0.5 text-ink">
+                  <Value value={requisites[key] ?? ''} />
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <p className="mt-6 text-sm text-ink-muted">
             © {year} {requisites.shortName}
-            {' · '}
-            ИНН <Value value={requisites.inn} />
-            {' · '}
-            ОГРН <Value value={requisites.ogrn} />
           </p>
 
           {/* Через RichText, а не как обычный текст: в дисклеймере есть

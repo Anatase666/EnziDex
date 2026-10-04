@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { CloseIcon } from '@/components/icons';
 import { Logo } from './Logo';
-import { legalNav, mainNav } from '@/content/site';
+import { mainNav } from '@/content/site';
 import { cn } from '@/lib/cn';
 import { isActivePath } from '@/lib/paths';
 
@@ -148,20 +148,6 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
               </li>
             );
           })}
-        </ul>
-
-        <ul className="mt-10 flex flex-col gap-3">
-          {legalNav.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                onClick={onClose}
-                className="text-sm text-ink-muted underline underline-offset-4"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
         </ul>
       </nav>
     </div>

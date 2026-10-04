@@ -19,7 +19,10 @@ Next.js 16 (App Router), TypeScript strict, Tailwind CSS v4, статическ�
 
 ## Страницы
 
-`/` · `/product` · `/science` · `/faq` · `/legal` · 404
+`/` · `/product` · `/faq` · 404
+
+Страниц «Научная база» и «Юридические данные» нет по решению заказчика.
+Реквизиты изготовителя — в подвале (`components/layout/Footer.tsx`).
 
 ## Сайт информационный
 
