@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { Hero } from '@/components/sections/Hero';
 import { Problem } from '@/components/sections/Problem';
 import { Solution } from '@/components/sections/Solution';
-import { Summary } from '@/components/sections/Summary';
 import { Usage } from '@/components/sections/Usage';
 import { buildMetadata } from '@/lib/seo';
 
@@ -13,12 +12,10 @@ export const metadata: Metadata = buildMetadata('home');
  * Главная (ТЗ 4.1, переработана по правкам заказчика).
  *
  * Маршрут чтения: что это (Hero) → почему налёт возвращается (Problem) →
- * что делает фермент (Solution) → как пользоваться (Usage) → коротко
- * обо всём с переходом в «Продукт» (Summary).
+ * что делает фермент (Solution) → как пользоваться (Usage).
  *
  * Ритм страницы задан чередованием плоскостей: светлый градиент первого
- * экрана → тёмная полоса проблемы → фон страницы → белая полоса применения
- * → фон страницы. Тёмная полоса одна: это главный контраст сайта, и второе
+ * экрана → тёмная полоса проблемы → фон страницы → белая полоса применения. Тёмная полоса одна: это главный контраст сайта, и второе
  * такое пятно обесценило бы первое.
  *
  * Блок частых вопросов убран — страница ведёт в разделы, а не пересказывает
@@ -31,7 +28,6 @@ export default function HomePage() {
       <Problem />
       <Solution />
       <Usage />
-      <Summary />
     </>
   );
 }
