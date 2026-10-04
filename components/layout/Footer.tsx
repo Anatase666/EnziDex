@@ -30,7 +30,8 @@ import { isFilled } from '@/content/types';
  * случай, когда вычислять дату в браузере не нужно — достаточно
  * пересобрать сайт, что и так происходит при любой правке контента.
  */
-const REQUISITE_KEYS = ['inn', 'ogrn', 'kpp', 'legalAddress', 'actualAddress'] as const;
+/** В подвале по просьбе заказчика только ИНН и юридический адрес. */
+const REQUISITE_KEYS = ['inn', 'legalAddress'] as const;
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -91,12 +92,12 @@ export function Footer() {
 
         {/* Реквизиты изготовителя, копирайт, дисклеймер */}
         <div className="border-t border-hairline py-8">
-          {/* Полное наименование стоит сразу под заголовком «Изготовитель»:
+          {/* Наименование стоит сразу под заголовком «Изготовитель»:
               отдельная подпись с тем же словом читалась бы как повтор. */}
           <h2 className="text-sm font-semibold text-ink">{footer.requisitesHeading}</h2>
-          <p className="mt-2 text-sm text-ink">{requisites.legalName}</p>
+          <p className="mt-2 text-sm text-ink">{requisites.shortName}</p>
 
-          <dl className="mt-4 grid gap-x-8 gap-y-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
+          <dl className="mt-4 grid gap-x-8 gap-y-4 text-sm sm:grid-cols-2">
             {REQUISITE_KEYS.map((key) => (
               <div key={key}>
                 <dt className="text-ink-muted">{requisiteLabels[key]}</dt>
