@@ -14,8 +14,11 @@ import { hero } from '@/content/home';
  * страницы. Это единственный градиент на сайте: он отделяет первый экран
  * от остального без линейки и без капслок-лейбла, запрещённого ТЗ 7.4.
  *
- * Кнопка одна. Вторая («Оставить заявку») убрана вместе со всей механикой
- * обращений, и оставшаяся стала основной.
+ * Кнопка одна, рядом — текстовая ссылка второго уровня на состав.
+ * «Оставить заявку» убрана вместе со всей механикой обращений.
+ *
+ * Изображение вертикальное (пачка и туба в рост), поэтому его ширина
+ * ограничена: во всю колонку оно вытянуло бы первый экран выше окна.
  */
 export function Hero() {
   return (
@@ -35,9 +38,12 @@ export function Hero() {
               {hero.subheading}
             </p>
 
-            <div className="mt-9">
+            <div className="mt-9 flex flex-wrap items-center gap-3">
               <Button href={hero.cta.href} size="lg">
                 {hero.cta.label}
+              </Button>
+              <Button href={hero.secondaryLink.href} variant="quiet" size="lg">
+                {hero.secondaryLink.label}
               </Button>
             </div>
           </div>
@@ -45,8 +51,8 @@ export function Hero() {
           <div className="lg:col-span-6 lg:pl-6">
             <ProductImage
               priority
-              sizes="(min-width: 64rem) 33rem, (min-width: 40rem) 28rem, (min-width: 27rem) 24rem, calc(100vw - 3rem)"
-              className="mx-auto max-w-sm sm:max-w-md lg:max-w-full"
+              sizes="(min-width: 64rem) 28rem, (min-width: 40rem) 24rem, min(20rem, calc(100vw - 3rem))"
+              className="mx-auto max-w-xs sm:max-w-sm lg:max-w-md"
             />
           </div>
         </div>

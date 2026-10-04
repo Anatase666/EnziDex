@@ -110,6 +110,8 @@ export function productJsonLd() {
       { '@type': 'PropertyValue', name: 'Объём', value: '10 мл' },
       { '@type': 'PropertyValue', name: 'Форма выпуска', value: 'Гель' },
       { '@type': 'PropertyValue', name: 'Фториды', value: 'Не содержит' },
+      { '@type': 'PropertyValue', name: 'Абразивные частицы', value: 'Не содержит' },
+      { '@type': 'PropertyValue', name: 'Пероксиды', value: 'Не содержит' },
       ...(activeIngredient
         ? [
             {

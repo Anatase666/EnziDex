@@ -53,8 +53,15 @@ export type UsageStep = {
   title: string;
   /** Что именно делать. */
   description: string;
-  /** Длительность или количество, если заданы производителем. */
-  meta?: string;
+};
+
+/** Строка «характеристика — значение»: карточка продукта, инструкция. */
+export type Attribute = {
+  label: string;
+  /** Значение. Может содержать TODO_CONTENT целиком или внутри фразы. */
+  value: Fillable;
+  /** Пояснение мелким шрифтом под значением — для непривычных терминов. */
+  note?: string;
 };
 
 /* ─── FAQ ──────────────────────────────────────────────────────────────── */
@@ -86,6 +93,7 @@ export type Requisites = {
   ogrn: Fillable;
   kpp?: Fillable;
   legalAddress: Fillable;
+  /** Фактический адрес производства. */
   actualAddress: Fillable;
 };
 

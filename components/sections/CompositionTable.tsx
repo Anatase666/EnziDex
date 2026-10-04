@@ -1,5 +1,5 @@
 import { Section } from '@/components/layout/Section';
-import { ingredients } from '@/content/product';
+import { compositionSection, ingredients } from '@/content/product';
 import { cn } from '@/lib/cn';
 
 /**
@@ -12,6 +12,11 @@ import { cn } from '@/lib/cn';
  * который лишает таблицу её семантики в скринридерах. Список из десяти
  * элементов с подписанными полями честнее описывает структуру данных
  * и перестраивается в одну колонку без потерь.
+ *
+ * На мобильном каждый компонент — отдельная карточка: название и INCI,
+ * назначение, комментарий под ними. Три колонки с длинными комментариями
+ * на узком экране читаются плохо (замечание заказчика). С lg карточки
+ * превращаются в строки таблицы.
  *
  * Порядок перечисления не сортируется и не меняется: по правилам маркировки
  * он означает убывание концентрации и должен совпадать с упаковкой.
@@ -29,13 +34,16 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
         <span>Комментарий</span>
       </div>
 
-      <ul className="divide-y divide-hairline border-b border-hairline lg:border-t-0">
+      <ul className="flex flex-col gap-3 lg:gap-0 lg:divide-y lg:divide-hairline lg:border-b lg:border-hairline">
         {ingredients.map((ingredient) => (
           <li
             key={ingredient.inci}
             className={cn(
-              'grid gap-2 py-5 lg:grid-cols-[minmax(0,15rem)_minmax(0,11rem)_1fr] lg:gap-8',
-              ingredient.isActive && 'bg-accent-soft/45',
+              'grid gap-2 rounded-xl border p-5',
+              'lg:grid-cols-[minmax(0,15rem)_minmax(0,11rem)_1fr] lg:gap-8 lg:rounded-none lg:border-0 lg:px-0',
+              ingredient.isActive
+                ? 'border-accent/30 bg-accent-soft/45'
+                : 'border-hairline bg-surface lg:bg-transparent',
             )}
           >
             <div className={cn(ingredient.isActive && 'lg:pl-4')}>
@@ -52,7 +60,7 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
               </p>
             </div>
 
-            <p className="text-ink-muted lg:text-ink">
+            <p className="text-sm font-medium text-accent-ink lg:text-base lg:font-normal lg:text-ink">
               <span className="sr-only">Назначение: </span>
               {ingredient.role}
             </p>
@@ -64,13 +72,19 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
           </li>
         ))}
       </ul>
+
+      <p className="mt-6 text-ink-muted">{compositionSection.footnote}</p>
     </>
   );
 
   if (headless) return content;
 
   return (
-    <Section id="composition" heading="Состав">
+    <Section
+      id="composition"
+      heading={compositionSection.heading}
+      lead={compositionSection.lead}
+    >
       {content}
     </Section>
   );

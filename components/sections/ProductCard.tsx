@@ -1,6 +1,6 @@
 import { Container } from '@/components/layout/Container';
 import { ProductImage } from '@/components/ui/ProductImage';
-import { Value } from '@/components/ui/Value';
+import { RichText } from '@/components/ui/RichText';
 import { productCard } from '@/content/product';
 
 /**
@@ -36,11 +36,17 @@ export function ProductCard() {
                 >
                   <dt className="text-ink-muted">{attribute.label}</dt>
                   <dd className="font-medium text-ink">
-                    <Value value={attribute.value} />
+                    {/* RichText, а не Value: маркер может стоять и внутри фразы. */}
+                    <RichText measure={false}>{attribute.value}</RichText>
+                    {'note' in attribute && (
+                      <p className="mt-1 text-sm font-normal text-ink-muted">{attribute.note}</p>
+                    )}
                   </dd>
                 </div>
               ))}
             </dl>
+
+            <p className="mt-6 text-ink-muted">{productCard.footnote}</p>
           </div>
         </div>
       </Container>

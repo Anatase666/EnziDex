@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 import { Container } from './Container';
 import { Logo } from './Logo';
-import { RichText } from '@/components/ui/RichText';
 import { Value } from '@/components/ui/Value';
 import {
   contacts,
@@ -94,10 +93,12 @@ export function Footer() {
 
         {/* Реквизиты изготовителя, копирайт, дисклеймер */}
         <div className="border-t border-hairline py-8">
+          {/* Полное наименование стоит сразу под заголовком «Изготовитель»:
+              отдельная подпись с тем же словом читалась бы как повтор. */}
           <h2 className="text-sm font-semibold text-ink">{footer.requisitesHeading}</h2>
           <p className="mt-2 text-sm text-ink">{requisites.legalName}</p>
 
-          <dl className="mt-4 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-3 lg:grid-cols-5">
+          <dl className="mt-4 grid gap-x-8 gap-y-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
             {REQUISITE_KEYS.map((key) => (
               <div key={key}>
                 <dt className="text-ink-muted">{requisiteLabels[key]}</dt>
@@ -108,16 +109,9 @@ export function Footer() {
             ))}
           </dl>
 
-          <p className="mt-6 text-sm text-ink-muted">
-            © {year} {requisites.shortName}
+          <p className="mt-8 max-w-3xl border-t border-hairline pt-6 text-sm text-ink-muted">
+            © {year} {requisites.shortName}. {footerDisclaimer}
           </p>
-
-          {/* Через RichText, а не как обычный текст: в дисклеймере есть
-              незаполненное место, и оно должно выглядеть пометкой, а не
-              служебным маркером. */}
-          <RichText measure={false} className="mt-3 max-w-3xl text-sm text-ink-muted">
-            {footerDisclaimer}
-          </RichText>
         </div>
       </Container>
     </footer>
