@@ -1,19 +1,36 @@
+import type { ComponentType, SVGProps } from 'react';
+
 import { Container } from '@/components/layout/Container';
+import {
+  MicrofloraIcon,
+  NoFluorideIcon,
+  NoPeroxideIcon,
+  ToothIcon,
+} from '@/components/icons';
 import { solution } from '@/content/home';
 
 /**
  * Решение (ТЗ FR-H3, переработано по правкам заказчика).
  *
- * Под текстом четыре отличия, сформулированные через то, чем продукт не
- * является: не абразив, не антисептик, не пероксид, без фтора. Каждое
- * проверяется по списку компонентов, поэтому это факты о рецептуре, а не
- * обещания.
+ * Под текстом четыре коротких отличия в ячейках с иконками: без абразива,
+ * не подавляет микрофлору, без пероксидов, без фторидов. Каждое
+ * проверяется по списку компонентов.
  *
  * Подача через «чем это не является» выбрана намеренно: продукт попадает в
  * категорию, где у покупателя уже есть готовые ожидания от зубных паст и
  * отбеливающих систем, и быстрее всего объяснить новое, отделив его от
  * знакомого.
  */
+const BENEFIT_ICONS: Record<
+  (typeof solution.benefits)[number]['icon'],
+  ComponentType<SVGProps<SVGSVGElement>>
+> = {
+  abrasive: ToothIcon,
+  microflora: MicrofloraIcon,
+  peroxide: NoPeroxideIcon,
+  fluoride: NoFluorideIcon,
+};
+
 export function Solution() {
   return (
     <section className="py-16 md:py-20 lg:py-24">
@@ -29,13 +46,23 @@ export function Solution() {
           </div>
         </div>
 
-        <ul className="mt-14 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-          {solution.contrasts.map((contrast) => (
-            <li key={contrast.title} className="border-t-2 border-accent pt-5">
-              <h3 className="text-xl font-semibold text-ink">{contrast.title}</h3>
-              <p className="mt-2.5 text-ink-muted">{contrast.description}</p>
-            </li>
-          ))}
+        {/* Короткие ячейки с иконкой вместо карточек с абзацами: отличия
+            читаются за секунду, подробности — в составе на /product. */}
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {solution.benefits.map((benefit) => {
+            const BenefitIcon = BENEFIT_ICONS[benefit.icon];
+            return (
+              <li
+                key={benefit.icon}
+                className="flex items-center gap-4 rounded-2xl border border-hairline bg-surface p-5"
+              >
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-xl border border-accent/40 bg-accent-soft/60 text-accent">
+                  <BenefitIcon className="size-7" aria-hidden="true" />
+                </span>
+                <p className="text-lg leading-snug text-ink">{benefit.text}</p>
+              </li>
+            );
+          })}
         </ul>
       </Container>
     </section>
