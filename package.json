@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "next lint",
     "check:content": "node scripts/check-content.mjs",
-    "postbuild": "node scripts/finalize-export.mjs"
+    "postbuild": "node scripts/finalize-export.mjs",
+    "images": "node scripts/build-product-image.mjs"
   },
   "dependencies": {
     "next": "^16.3.4",

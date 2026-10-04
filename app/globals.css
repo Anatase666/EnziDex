@@ -285,4 +285,27 @@
   .rich-text strong {
     font-weight: 600;
   }
+
+  /* Подложка под изображением упаковки: мягкое фиалковое свечение.
+     isolation создаёт отдельный контекст наложения, поэтому свечение с
+     z-index: -1 остаётся позади картинки, но не уходит под фон секции. */
+  .product-stage {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .product-stage::before {
+    content: '';
+    position: absolute;
+    inset: 0 4% 8%;
+    z-index: -1;
+    border-radius: 9999px;
+    pointer-events: none;
+    background: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--color-accent) 12%, transparent),
+      color-mix(in srgb, var(--color-accent) 4%, transparent) 60%,
+      transparent
+    );
+  }
 }

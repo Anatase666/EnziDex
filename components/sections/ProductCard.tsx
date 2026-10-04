@@ -1,5 +1,5 @@
-import { PackageRender } from './PackageRender';
 import { Container } from '@/components/layout/Container';
+import { ProductImage } from '@/components/ui/ProductImage';
 import { Value } from '@/components/ui/Value';
 import { productCard } from '@/content/product';
 
@@ -16,7 +16,10 @@ export function ProductCard() {
       <Container>
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-5">
-            <PackageRender className="mx-auto max-w-sm lg:sticky lg:top-28 lg:max-w-none" />
+            <ProductImage
+              sizes="(min-width: 64rem) 27rem, (min-width: 27rem) 24rem, calc(100vw - 3rem)"
+              className="mx-auto max-w-sm lg:sticky lg:top-28 lg:max-w-none"
+            />
           </div>
 
           <div className="lg:col-span-7">

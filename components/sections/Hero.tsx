@@ -1,15 +1,14 @@
-import { PackageRender } from './PackageRender';
 import { Container } from '@/components/layout/Container';
 import { Button } from '@/components/ui/Button';
+import { ProductImage } from '@/components/ui/ProductImage';
 import { hero } from '@/content/home';
 
 /**
  * Первый экран (ТЗ FR-H1, переработан по правкам заказчика).
  *
- * Композиция переставлена: раньше текст и картинка стояли двумя равными
- * колонками, теперь упаковка крупная и вынесена на светящуюся подложку —
- * продукт показан лицом, как и просили. Текст занимает шесть колонок из
- * двенадцати, упаковка — пять, между ними колонка воздуха.
+ * Текст и упаковка стоят двумя равными колонками; упаковка — рендер
+ * продукта на мягкой фиалковой подложке. Картинка здесь главный кандидат
+ * в LCP, поэтому грузится с высоким приоритетом и без ленивой загрузки.
  *
  * Фон первого экрана — мягкий фиалковый градиент, растворяющийся в фоне
  * страницы. Это единственный градиент на сайте: он отделяет первый экран
@@ -44,7 +43,11 @@ export function Hero() {
           </div>
 
           <div className="lg:col-span-6 lg:pl-6">
-            <PackageRender className="mx-auto max-w-sm sm:max-w-md lg:max-w-full" />
+            <ProductImage
+              priority
+              sizes="(min-width: 64rem) 33rem, (min-width: 40rem) 28rem, (min-width: 27rem) 24rem, calc(100vw - 3rem)"
+              className="mx-auto max-w-sm sm:max-w-md lg:max-w-full"
+            />
           </div>
         </div>
 
