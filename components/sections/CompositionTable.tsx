@@ -83,7 +83,6 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
     <Section
       id="composition"
       heading={compositionSection.heading}
-      lead={compositionSection.lead}
     >
       {content}
     </Section>
