@@ -13,10 +13,9 @@ import { cn } from '@/lib/cn';
  * элементов с подписанными полями честнее описывает структуру данных
  * и перестраивается в одну колонку без потерь.
  *
- * На мобильном каждый компонент — отдельная карточка: название и INCI,
- * назначение, комментарий под ними. Три колонки с длинными комментариями
- * на узком экране читаются плохо (замечание заказчика). С lg карточки
- * превращаются в строки таблицы.
+ * Две колонки: компонент с INCI и назначение. Колонка комментариев убрана
+ * заказчиком. На мобильном каждый компонент — отдельная карточка, с lg —
+ * строка таблицы.
  *
  * Порядок перечисления не сортируется и не меняется: по правилам маркировки
  * он означает убывание концентрации и должен совпадать с упаковкой.
@@ -27,11 +26,10 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
       {/* Шапка «таблицы» появляется только там, где хватает ширины. */}
       <div
         aria-hidden="true"
-        className="hidden border-b border-ink/15 pb-3 text-sm font-medium text-ink-muted lg:grid lg:grid-cols-[minmax(0,15rem)_minmax(0,11rem)_1fr] lg:gap-8"
+        className="hidden border-b border-ink/15 pb-3 text-sm font-medium text-ink-muted lg:grid lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-8"
       >
         <span>Компонент (INCI)</span>
         <span>Назначение</span>
-        <span>Комментарий</span>
       </div>
 
       <ul className="flex flex-col gap-3 lg:gap-0 lg:divide-y lg:divide-hairline lg:border-b lg:border-hairline">
@@ -40,7 +38,7 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
             key={ingredient.inci}
             className={cn(
               'grid gap-2 rounded-xl border p-5',
-              'lg:grid-cols-[minmax(0,15rem)_minmax(0,11rem)_1fr] lg:gap-8 lg:rounded-none lg:border-0 lg:px-0',
+              'lg:grid-cols-[minmax(0,22rem)_1fr] lg:gap-8 lg:rounded-none lg:border-0 lg:px-0',
               ingredient.isActive
                 ? 'border-accent/30 bg-accent-soft/45'
                 : 'border-hairline bg-surface lg:bg-transparent',
@@ -63,11 +61,6 @@ export function CompositionTable({ headless = false }: { headless?: boolean }) {
             <p className="text-sm font-medium text-accent-ink lg:text-base lg:font-normal lg:text-ink">
               <span className="sr-only">Назначение: </span>
               {ingredient.role}
-            </p>
-
-            <p className={cn('text-ink-muted', ingredient.isActive && 'lg:pr-4')}>
-              <span className="sr-only">Комментарий: </span>
-              {ingredient.description}
             </p>
           </li>
         ))}
