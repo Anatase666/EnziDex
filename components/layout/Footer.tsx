@@ -10,7 +10,6 @@ import {
   mainNav,
   requisiteLabels,
   requisites,
-  site,
 } from '@/content/site';
 import { isFilled } from '@/content/types';
 
@@ -45,7 +44,6 @@ export function Footer() {
           <div className="lg:col-span-6">
             <Logo withDescriptor={false} />
             <p className="mt-4 max-w-xs text-sm text-ink-muted">{footer.brandNote}</p>
-            <p className="mt-3 max-w-xs text-sm text-ink-muted">{site.tagline}</p>
           </div>
 
           {/* Навигация */}
