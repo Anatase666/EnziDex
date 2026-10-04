@@ -68,7 +68,7 @@ export type Attribute = {
  * Категория «partnership» убрана вместе с разделом о поставках:
  * сайт информационный и обращений не принимает.
  */
-export type FaqCategory = 'product' | 'safety' | 'usage';
+export type FaqCategory = 'safety' | 'usage';
 
 export type FaqItem = {
   id: string;

@@ -27,7 +27,7 @@ export default function FaqPage() {
       <section className="pt-10 pb-10 md:pt-14">
         <Container>
           <h1 className="text-4xl max-w-[18ch] text-balance text-ink">
-            Вопросы и безопасность
+            FAQ
           </h1>
           <p className="mt-5 max-w-measure text-xl text-ink-muted">
             {faqItems.length} вопросов о продукте, составе и применении. Там, где
