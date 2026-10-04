@@ -119,8 +119,7 @@ in vitro и клинических исследований не было, на 
 | Частота применения, курс | `content/product.ts` → `usageInstructions.details`; `content/faq.ts` → `daily-use`, `how-to-use` | Строку инструкции, два ответа FAQ |
 | Возрастные ограничения | `usageInstructions.details`; `content/faq.ts` → `age-limit` | Строку инструкции, ответ FAQ |
 | Противопоказания (полный перечень) и побочные эффекты | `usageInstructions.details`; `content/faq.ts` → `side-effects` | Две строки инструкции, ответ FAQ |
-| Активность фермента, ед/мл или ед/г по спецификации | `content/product.ts` → `productCard.attributes` | Строку в карточке продукта |
-| Срок годности, условия хранения, срок после вскрытия | `productCard.attributes`, `usageInstructions.details`; `content/faq.ts` → `storage` | Две строки карточки, строку инструкции, ответ FAQ |
+| Срок годности, условия хранения, срок после вскрытия | `usageInstructions.details`; `content/faq.ts` → `storage` | Строку инструкции, ответ FAQ. Из карточки продукта эти строки убраны заказчиком |
 | Каналы продаж | `content/faq.ts` → `availability` | Ответ «Где можно приобрести». Пока данных нет, по просьбе заказчика выводится текст «Продукт готовится к выводу на рынок…», а не пометка |
 
 Блок «Данные маркировки» на `/legal` удалён третьим кругом правок вместе с

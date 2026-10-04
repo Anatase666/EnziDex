@@ -38,7 +38,7 @@ export function ProductCard() {
                   <dd className="font-medium text-ink">
                     {/* RichText, а не Value: маркер может стоять и внутри фразы. */}
                     <RichText measure={false}>{attribute.value}</RichText>
-                    {'note' in attribute && (
+                    {attribute.note && (
                       <p className="mt-1 text-sm font-normal text-ink-muted">{attribute.note}</p>
                     )}
                   </dd>
