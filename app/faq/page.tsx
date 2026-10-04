@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import { FaqList } from '@/components/sections/FaqList';
 import { Container } from '@/components/layout/Container';
 import { JsonLd } from '@/components/ui/JsonLd';
-import { faqCategories, faqItems } from '@/content/faq';
+import { faqCategories } from '@/content/faq';
 import { breadcrumbJsonLd, buildMetadata, faqJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata('faq');
@@ -29,11 +29,6 @@ export default function FaqPage() {
           <h1 className="text-4xl max-w-[18ch] text-balance text-ink">
             FAQ
           </h1>
-          <p className="mt-5 max-w-measure text-xl text-ink-muted">
-            {faqItems.length} вопросов о продукте, составе и применении. Там, где
-            ответ зависит от инструкции изготовителя, мы говорим об этом прямо,
-            а не заполняем пробел общими словами.
-          </p>
 
           {/* Быстрый переход по категориям: список длинный,
               и прокручивать его целиком ради одного раздела незачем. */}
