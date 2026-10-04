@@ -22,15 +22,6 @@ export function Problem() {
             <h2 className="text-section max-w-[14ch] text-balance text-ink-inverse">
               {problem.heading}
             </h2>
-
-            {/* Смысловой итог секции, вытащенный из текста. Стоит под
-                заголовком, а не после абзацев: читатель, который не станет
-                читать три абзаца, получит главное сразу. */}
-            {/* accent-light, а не accent: базовый фиалковый на тёмной
-                плашке даёт 2.4 : 1 и не проходит порог 3 : 1 для графики. */}
-            <p className="mt-8 max-w-[34ch] border-l-2 border-accent-light pl-5 text-lg text-ink-inverse/90">
-              {problem.pullQuote}
-            </p>
           </div>
 
           <div className="lg:col-span-7">
