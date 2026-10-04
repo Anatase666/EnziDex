@@ -31,8 +31,9 @@ export function Hero() {
 
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-6">
-          <div className="lg:col-span-6">
-            <h1 className="text-hero text-ink">{hero.heading}</h1>
+          {/* @container: размер заголовка привязан к ширине колонки (см. .hero-heading). */}
+          <div className="@container lg:col-span-6">
+            <h1 className="hero-heading text-hero text-ink">{hero.heading}</h1>
 
             <p className="mt-6 max-w-measure text-lg text-ink-muted md:mt-7">
               {hero.subheading}
