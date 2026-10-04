@@ -1,18 +1,16 @@
 import { Section } from '@/components/layout/Section';
-import { Disclaimer } from '@/components/ui/Disclaimer';
+import { InfoIcon } from '@/components/icons';
 import { RichText } from '@/components/ui/RichText';
 import { usageInstructions } from '@/content/product';
 
 /**
  * Инструкция по применению (ТЗ FR-P4).
  *
- * Формулировки шагов готовы; значения, которые задаёт только утверждённая
- * инструкция изготовителя, стоят пометкой «Требует корректировки» прямо
- * внутри фразы. Когда инструкция придёт, достаточно заменить маркеры в
- * content/product.ts — вёрстку трогать не нужно.
+ * Тексты — в content/product.ts → usageInstructions. Значения могут
+ * содержать TODO_CONTENT: RichText выведет его пометкой «Требует корректировки».
  *
- * Справа — блок «Важно»: то, что можно сказать уже сейчас, без инструкции.
- * На мобильном он встаёт под шаги.
+ * Справа — параметры применения и блок «Важно». На мобильном они встают
+ * под шаги.
  *
  * Нумерация шагов — единственное разрешённое ТЗ 7.4 место для цифр:
  * здесь последовательность действительно является последовательностью.
@@ -41,30 +39,36 @@ export function UsageDetailed() {
               </li>
             ))}
           </ol>
+        </div>
 
-          <dl className="mt-10 divide-y divide-hairline border-y border-hairline">
+        {/* Справа — параметры применения и «Важно» одной компактной колонкой:
+            шаги читаются слева, ключевые цифры видны рядом без прокрутки. */}
+        <div className="flex flex-col gap-4 lg:col-span-5">
+          <dl className="divide-y divide-hairline rounded-2xl border border-hairline bg-page px-6">
             {details.map((detail) => (
-              <div
-                key={detail.label}
-                className="grid gap-1 py-4 sm:grid-cols-[minmax(0,13rem)_1fr] sm:gap-6"
-              >
-                <dt className="text-ink-muted">{detail.label}</dt>
-                <dd className="text-ink">
+              <div key={detail.label} className="py-4">
+                <dt className="text-sm text-ink-muted">{detail.label}</dt>
+                <dd className="mt-1 font-medium text-ink">
                   <RichText measure={false}>{detail.value}</RichText>
                 </dd>
               </div>
             ))}
           </dl>
-        </div>
 
-        <div className="lg:col-span-5">
-          <Disclaimer title={important.heading} className="lg:sticky lg:top-28">
-            <ul className="flex list-disc flex-col gap-2 pl-5 marker:text-ink-muted">
+          <aside className="rounded-2xl border border-accent/25 bg-accent-soft/70 px-6 py-5">
+            <p className="flex items-center gap-2 font-semibold text-ink">
+              <InfoIcon className="size-5 shrink-0 text-accent" aria-hidden="true" />
+              {important.heading}
+            </p>
+            <ul className="mt-3 flex flex-col gap-2 text-ink-muted">
               {important.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item} className="flex gap-3">
+                  <span aria-hidden="true" className="mt-2.5 size-1.5 shrink-0 rounded-full bg-accent" />
+                  {item}
+                </li>
               ))}
             </ul>
-          </Disclaimer>
+          </aside>
         </div>
       </div>
     </Section>
