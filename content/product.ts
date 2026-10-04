@@ -67,7 +67,9 @@ export const ingredients: readonly Ingredient[] = [
   },
   {
     inci: 'Cellulose Gum',
-    name: 'Карбоксиметилцеллюлоза натрия',
+    // \u00AD — мягкий перенос: в узкой карточке длинное слово
+    // переносится по слогам с дефисом, а не рвётся где попало.
+    name: 'Карбокси\u00ADметил\u00ADцеллюлоза натрия',
     role: 'Загуститель',
   },
   {
@@ -88,7 +90,7 @@ export const ingredients: readonly Ingredient[] = [
   {
     inci: 'Menthol',
     name: 'Ментол',
-    role: 'Вкусоароматический компонент',
+    role: 'Вкусо\u00ADароматический компонент',
   },
   {
     inci: 'Sodium Benzoate',
