@@ -1,34 +1,17 @@
-import { Section } from '@/components/layout/Section';
+import { Container } from '@/components/layout/Container';
 import { Accordion } from '@/components/ui/Accordion';
-import { faqCategories, faqItems } from '@/content/faq';
+import { faqItems } from '@/content/faq';
 
 /**
- * Полный список вопросов, сгруппированный по категориям (ТЗ FR-F1, FR-F2).
- *
- * Аккордеоны разнесены по категориям, а не свалены в один список: у четырёх
- * групп разная аудитория, и «Поставки и сотрудничество» не должно мешать
- * человеку, который пришёл за безопасностью состава.
+ * Список вопросов (ТЗ FR-F1). Одна группа без подзаголовка: вопросов
+ * немного, и деление на категории заказчик убрал.
  */
 export function FaqList() {
   return (
-    <>
-      {faqCategories.map((category, index) => {
-        const items = faqItems.filter((item) => item.category === category.id);
-        if (items.length === 0) return null;
-
-        return (
-          <Section
-            key={category.id}
-            id={category.id}
-            heading={category.title}
-            lead={category.note}
-            tone={index % 2 === 1 ? 'surface' : 'page'}
-            size="compact"
-          >
-            <Accordion items={items} />
-          </Section>
-        );
-      })}
-    </>
+    <section className="pb-16 md:pb-20">
+      <Container>
+        <Accordion items={faqItems} />
+      </Container>
+    </section>
   );
 }

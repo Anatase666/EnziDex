@@ -64,15 +64,8 @@ export type Attribute = {
 
 /* ─── FAQ ──────────────────────────────────────────────────────────────── */
 
-/**
- * Категория «partnership» убрана вместе с разделом о поставках:
- * сайт информационный и обращений не принимает.
- */
-export type FaqCategory = 'safety' | 'usage';
-
 export type FaqItem = {
   id: string;
-  category: FaqCategory;
   question: string;
   /**
    * Ответ. Допускается ограниченная разметка: абзацы разделяются пустой
