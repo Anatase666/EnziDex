@@ -87,7 +87,6 @@ export const footer = {
 /** Подписи реквизитов в подвале. */
 export const requisiteLabels = {
   inn: 'ИНН',
-  legalAddress: 'Юридический адрес',
 } as const;
 
 /* ─── 404 (ТЗ FR-X2) ───────────────────────────────────────────────────── */

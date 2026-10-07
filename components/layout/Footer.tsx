@@ -30,8 +30,8 @@ import { isFilled } from '@/content/types';
  * случай, когда вычислять дату в браузере не нужно — достаточно
  * пересобрать сайт, что и так происходит при любой правке контента.
  */
-/** В подвале по просьбе заказчика только ИНН и юридический адрес. */
-const REQUISITE_KEYS = ['inn', 'legalAddress'] as const;
+/** В подвале по просьбе заказчика только ИНН. */
+const REQUISITE_KEYS = ['inn'] as const;
 
 export function Footer() {
   const year = new Date().getFullYear();
