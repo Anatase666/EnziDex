@@ -37,7 +37,7 @@ export const mainNav: readonly NavItem[] = [
 export const requisites: Requisites = {
   legalName: `Общество с ограниченной ответственностью «ЭНЗИДЕКС»`,
   shortName: 'ООО «ЭНЗИДЕКС»',
-  inn: TODO_CONTENT,
+  inn: '5904416749',
   ogrn: TODO_CONTENT,
   kpp: TODO_CONTENT,
   legalAddress: TODO_CONTENT,
