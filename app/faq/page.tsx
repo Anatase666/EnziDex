@@ -7,10 +7,7 @@ import { breadcrumbJsonLd, buildMetadata, faqJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata('faq');
 
-/**
- * FAQ: заголовок и сразу список вопросов (правки заказчика, октябрь 2026).
- * Категории, лид и подзаголовки групп убраны.
- */
+
 export default function FaqPage() {
   return (
     <>

@@ -10,8 +10,10 @@ import {
   mainNav,
   requisiteLabels,
   requisites,
+  supporters,
 } from '@/content/site';
 import { isFilled } from '@/content/types';
+import { assetPath } from '@/lib/seo';
 
 /**
  * Подвал (ТЗ FR-G2).
@@ -48,6 +50,29 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-4">
             <Logo withDescriptor={false} />
             <p className="mt-3 max-w-xs text-sm text-ink-muted">{footer.brandNote}</p>
+
+            {/* Логотипы поддержки — под описанием компании, одной строкой
+                одинаковой высоты: так они читаются как подпись бренда,
+                а не как рекламный блок. */}
+            <div className="mt-6">
+              <p className="text-xs text-ink-muted">{supporters.heading}</p>
+              <ul className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
+                {supporters.logos.map((logo) => (
+                  <li key={logo.src}>
+                    {/* eslint-disable-next-line @next/next/no-img-element -- статический экспорт */}
+                    <img
+                      src={assetPath(logo.src)}
+                      alt={logo.alt}
+                      width={logo.width}
+                      height={logo.height}
+                      loading="lazy"
+                      decoding="async"
+                      className="block h-12 w-auto"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Навигация */}

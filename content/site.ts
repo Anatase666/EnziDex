@@ -89,6 +89,31 @@ export const requisiteLabels = {
   inn: 'ИНН',
 } as const;
 
+/**
+ * Обязательные логотипы поддержки в подвале.
+ *
+ * Файлы — в public/images/partners/. Логотип Платформы в исходнике белый
+ * (для тёмного фона); для светлого подвала заливка заменена на тёмный
+ * цвет сайта, сам знак не менялся.
+ */
+export const supporters = {
+  heading: 'При поддержке',
+  logos: [
+    {
+      src: '/images/partners/fund-logo.webp',
+      alt: 'Фонд содействия инновациям',
+      width: 424,
+      height: 198,
+    },
+    {
+      src: '/images/partners/platform-logo.svg',
+      alt: 'Платформа университетского технологического предпринимательства',
+      width: 106,
+      height: 81,
+    },
+  ],
+} as const;
+
 /* ─── 404 (ТЗ FR-X2) ───────────────────────────────────────────────────── */
 
 export const notFoundPage = {

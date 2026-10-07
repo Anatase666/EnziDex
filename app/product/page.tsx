@@ -8,14 +8,6 @@ import { breadcrumbJsonLd, buildMetadata, productJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata('product');
 
-/**
- * О продукте (ТЗ 4.2 с учётом правок заказчика).
- *
- * Убраны блоки «Что следует из состава», «Чего продукт не делает» и
- * финальный призыв с кнопками. Страница осталась справочной: карточка
- * продукта с объёмной визуализацией упаковки, полный состав и режим
- * применения.
- */
 export default function ProductPage() {
   return (
     <>
