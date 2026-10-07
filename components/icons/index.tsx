@@ -1,20 +1,7 @@
 import type { SVGProps } from 'react';
 
 /**
- * Локальный набор иконок (ТЗ 6.1).
- *
- * Подключать библиотеку ради нескольких иконок — лишние килобайты и чужая
- * визуальная манера. Здесь единая система: сетка 24×24, обводка 1.5,
- * скруглённые концы, без заливок. Цвет всегда currentColor, поэтому
- * иконка наследует цвет текста и не требует отдельного токена.
- *
- * Набор сокращён до фактически используемых знаков после того, как с сайта
- * убрали форму обращения и раздел документов. Держать в
- * репозитории десяток иконок «на всякий случай» — тот же мусор, что и
- * библиотека ради шести глифов, только свой.
- *
- * Все иконки декоративны: смысл несёт подпись рядом, поэтому в местах
- * использования им проставляется aria-hidden.
+ * Локальный набор иконок
  */
 
 type IconProps = SVGProps<SVGSVGElement>;
@@ -36,7 +23,6 @@ function Icon({ children, ...props }: IconProps) {
   );
 }
 
-/** Информация: блок-оговорка. */
 export function InfoIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -47,7 +33,6 @@ export function InfoIcon(props: IconProps) {
   );
 }
 
-/** Бургер-меню. */
 export function MenuIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -56,7 +41,6 @@ export function MenuIcon(props: IconProps) {
   );
 }
 
-/** Закрытие меню. */
 export function CloseIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -66,9 +50,7 @@ export function CloseIcon(props: IconProps) {
 }
 
 
-/* ─── Отличия продукта (блок «Что делает наш гель») ───────────────────── */
 
-/** Зуб со щитом: защита от кариеса. */
 export function ToothShieldIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -78,7 +60,6 @@ export function ToothShieldIcon(props: IconProps) {
   );
 }
 
-/** Зуб с пером: чувствительность зубов. */
 export function ToothFeatherIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -89,7 +70,6 @@ export function ToothFeatherIcon(props: IconProps) {
   );
 }
 
-/** Снежинка: свежесть дыхания. */
 export function SnowflakeIcon(props: IconProps) {
   return (
     <Icon {...props}>
@@ -100,7 +80,6 @@ export function SnowflakeIcon(props: IconProps) {
   );
 }
 
-/** Перечёркнутая F: без фторидов. */
 export function NoFluorideIcon(props: IconProps) {
   return (
     <Icon {...props}>

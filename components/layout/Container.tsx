@@ -10,11 +10,6 @@ type ContainerProps = {
   className?: string;
 };
 
-/**
- * Горизонтальные рамки макета (ТЗ 7.5): максимум 1200px, боковые поля
- * 24px на мобильном и 40px от 1024px. Ни один блок не задаёт эти значения
- * сам — иначе они разъезжаются между секциями.
- */
 export function Container({
   children,
   width = 'default',

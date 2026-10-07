@@ -17,10 +17,6 @@ const SCROLL_THRESHOLD = 80;
 
 /**
  * Шапка (ТЗ FR-G1 с учётом правок заказчика).
- *
- * Кнопка «Оставить заявку» убрана: сайт информационный и обращений не
- * принимает. Вместе с ней исчезла и логика скрытия кнопки на странице
- * контактов — самой страницы больше нет.
  */
 export function Header() {
   const pathname = usePathname();
@@ -104,11 +100,6 @@ export function Header() {
               onClick={() => setIsMenuOpen(true)}
               aria-label="Открыть меню"
               aria-expanded={isMenuOpen}
-              // Панель размонтирована, пока меню закрыто, поэтому
-              // aria-controls ставится только когда цель существует:
-              // ссылка на несуществующий id — висячая, и скринридер
-              // сообщает о ней как об ошибке разметки. Состояние при
-              // этом всё равно передаётся через aria-expanded.
               aria-controls={isMenuOpen ? 'mobile-menu' : undefined}
               className="-mr-2 inline-flex size-11 items-center justify-center rounded-lg text-ink transition-colors hover:bg-sunken lg:hidden"
             >

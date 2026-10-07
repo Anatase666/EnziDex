@@ -1,17 +1,4 @@
 import { ImageResponse } from 'next/og';
-
-/**
- * OG-изображение 1200×630 (ТЗ 8.3).
- *
- * Генерируется на этапе сборки и кладётся в out/ как обычный PNG —
- * статическому экспорту это не мешает, рантайм не нужен.
- *
- * Шрифт подгружается явно: встроенная гарнитура Satori покрывает кириллицу
- * не во всех начертаниях, а превью с прямоугольниками вместо букв — худшая
- * из возможных визиток ссылки. Берём тот же Onest, что и на сайте.
- */
-
-/** Обязательно при output: 'export' — картинка печётся один раз при сборке. */
 export const dynamic = 'force-static';
 
 export const size = { width: 1200, height: 630 };
@@ -19,15 +6,6 @@ export const contentType = 'image/png';
 export const alt =
   'ЭнзиДекс — гель с ферментом декстраназой для ухода за полостью рта, 10 мл';
 
-/**
- * Satori читает ttf и otf, но не woff2 и не eot.
- *
- * Формат отдачи Google Fonts зависит от User-Agent: современному браузеру
- * достаётся woff2, Internet Explorer — eot, и оба варианта здесь бесполезны.
- * Старый эндпоинт css (v1) без заголовка User-Agent отдаёт честный ttf —
- * им и пользуемся. Заодно это полная гарнитура, а не подмножество, поэтому
- * кириллица в ней точно есть.
- */
 async function loadOnest(weight: 400 | 600): Promise<ArrayBuffer | null> {
   try {
     const cssResponse = await fetch(
@@ -45,8 +23,6 @@ async function loadOnest(weight: 400 | 600): Promise<ArrayBuffer | null> {
 
     return await fontResponse.arrayBuffer();
   } catch {
-    // Сборка не должна падать из-за недоступности шрифтового CDN:
-    // без него Satori возьмёт запасную гарнитуру.
     return null;
   }
 }
