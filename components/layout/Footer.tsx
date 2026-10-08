@@ -101,7 +101,6 @@ export function Footer() {
         {/* Поддержка: логотипы слева, пояснение справа длинной полосой */}
         <div className="flex flex-col gap-4 border-t border-hairline py-6 md:flex-row md:items-center md:gap-8">
           <div className="shrink-0">
-            <p className="text-xs text-ink-muted">{supporters.heading}</p>
             <ul className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
               {supporters.logos.map((logo) => (
                 <li key={logo.src}>
