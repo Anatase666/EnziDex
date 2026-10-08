@@ -58,6 +58,9 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
+              <p className="max-w-md text-xs leading-relaxed text-ink-muted">
+                {supporters.text}
+              </p>
             </div>
           </div>
 
