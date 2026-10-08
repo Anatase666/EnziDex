@@ -36,32 +36,6 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-4">
             <Logo withDescriptor={false} />
             <p className="mt-3 max-w-xs text-sm text-ink-muted">{footer.brandNote}</p>
-
-            {/* Логотипы поддержки — под описанием компании, одной строкой
-                одинаковой высоты: так они читаются как подпись бренда,
-                а не как рекламный блок. */}
-            <div className="mt-6">
-              <p className="text-xs text-ink-muted">{supporters.heading}</p>
-              <ul className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
-                {supporters.logos.map((logo) => (
-                  <li key={logo.src}>
-                    {/* eslint-disable-next-line @next/next/no-img-element -- статический экспорт */}
-                    <img
-                      src={assetPath(logo.src)}
-                      alt={logo.alt}
-                      width={logo.width}
-                      height={logo.height}
-                      loading="lazy"
-                      decoding="async"
-                      className="block h-12 w-auto"
-                    />
-                  </li>
-                ))}
-              </ul>
-              <p className="max-w-md text-xs leading-relaxed text-ink-muted">
-                {supporters.text}
-              </p>
-            </div>
           </div>
 
           {/* Навигация */}
@@ -122,6 +96,33 @@ export function Footer() {
               </ul>
             </div>
           )}
+        </div>
+
+        {/* Поддержка: логотипы слева, пояснение справа длинной полосой */}
+        <div className="flex flex-col gap-4 border-t border-hairline py-6 md:flex-row md:items-center md:gap-8">
+          <div className="shrink-0">
+            <p className="text-xs text-ink-muted">{supporters.heading}</p>
+            <ul className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-3">
+              {supporters.logos.map((logo) => (
+                <li key={logo.src}>
+                  {/* eslint-disable-next-line @next/next/no-img-element -- статический экспорт */}
+                  <img
+                    src={assetPath(logo.src)}
+                    alt={logo.alt}
+                    width={logo.width}
+                    height={logo.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-12 w-auto"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p className="flex-1 text-xs leading-relaxed text-ink-muted">
+            {supporters.text}
+          </p>
         </div>
 
         <p className="border-t border-hairline py-5 text-xs text-ink-muted">
